@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class KamaController : MonoBehaviour
 {
-    [SerializeField] private float kamaSpeed = 5f;
+    [SerializeField] private float kamaSpeed = 20f;
 
     private Rigidbody2D rb;
 
@@ -21,6 +21,14 @@ public class KamaController : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         kamaSpeed = 0;
-        PlayerController.instance.DeactivateBreakTime();
+        if (collision.gameObject.CompareTag("Wood") || collision.gameObject.CompareTag("Wood Ground"))
+        {
+            PlayerController.instance.MovePlayerToKama();
+        }
+        else
+        {
+            PlayerController.instance.DeactivateBreakTime();
+            PlayerController.instance.RemoveSpawnedKama();
+        }
     }
 }

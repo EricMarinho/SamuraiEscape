@@ -414,7 +414,7 @@ GameObject:
   - component: {fileID: 341438452}
   m_Layer: 0
   m_Name: Wood (1)
-  m_TagString: Ground
+  m_TagString: Wood Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2072,6 +2072,9 @@ MonoBehaviour:
   playerSpeed: 3
   jumpForce: 5
   teleportBreakTime: 0.2
+  kamaTeleportSpeed: 0.1
+  dashTime: 0.35
+  dashSpeed: 10
   kunaiOrigin: {fileID: 220836389}
   kunaiPrefab: {fileID: 4599086513711698186, guid: 05ec7812172c2da4dadb18945f864534, type: 3}
   kamaOrigin: {fileID: 1716199087}
@@ -2079,6 +2082,7 @@ MonoBehaviour:
   isJumping: 0
   hasKama: 1
   hasKunai: 1
+  hasDash: 0
 --- !u!1 &1392013458
 GameObject:
   m_ObjectHideFlags: 0
@@ -2253,7 +2257,7 @@ GameObject:
   - component: {fileID: 1479909271}
   m_Layer: 0
   m_Name: Wood 1
-  m_TagString: Untagged
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2548,7 +2552,7 @@ GameObject:
   - component: {fileID: 1607484354}
   m_Layer: 0
   m_Name: Wood
-  m_TagString: Untagged
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
