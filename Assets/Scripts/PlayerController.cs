@@ -22,8 +22,9 @@ public class PlayerController : MonoBehaviour
     public bool hasKama = true;
     public bool hasKunai = true;
     public bool hasDash = false;
-    private bool isMovingWithKama = false;
+    public bool isMovingWithKama = false;
     private bool isDashing = false;
+    public bool isOnKama = false;
 
     private Vector2 dashDirection;
 
@@ -60,12 +61,6 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (isMovingWithKama)
-        {
-            LerpPlayerPosition();
-            return;
-        }
-
         if (isDashing)
         {
             rb.velocity = Vector2.zero;
@@ -77,9 +72,32 @@ public class PlayerController : MonoBehaviour
                 isDashing = false;
                 dashTimer = 0f;
                 rb.gravityScale = 1f;
+                isOnKama = false;
             };
             return;
         }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+
+            if (isJumping && hasDash)
+            {
+                Dash();
+                return;
+            }
+
+            if (isJumping) return;
+
+            Jump();
+        }
+
+        if (isMovingWithKama)
+        {
+            LerpPlayerPosition();
+            return;
+        }
+
+        if (isOnKama) return;
 
         if (horizontal < 0f)
         {
@@ -102,19 +120,6 @@ public class PlayerController : MonoBehaviour
         {
             ThrowKama();
         }
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (isJumping && hasDash)
-            {
-                Dash();
-                return;
-            }
-
-            if (isJumping) return;
-            
-            Jump();
-        }
     }
 
     void LerpPlayerPosition()
@@ -129,8 +134,11 @@ public class PlayerController : MonoBehaviour
         else
         {
             rb.transform.position = spawnedKama.transform.position;
-            isMovingWithKama = false;
             RemoveSpawnedKama();
+            hasDash = true;
+            isJumping = true;
+            isMovingWithKama = false;
+            isOnKama = true;
         }
     }
 
@@ -148,6 +156,10 @@ public class PlayerController : MonoBehaviour
         dashDirection = new Vector2(horizontal, vertical).normalized;
         isDashing = true;
         hasDash = false;
+        if(spawnedKama != null)
+        {
+            RemoveSpawnedKama();
+        }
     }
 
     public void ActivateBreakTime()

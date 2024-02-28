@@ -12,9 +12,14 @@ public class FootHandler : MonoBehaviour
             PlayerController.instance.isJumping = false;
             PlayerController.instance.hasDash = false;
             PlayerController.instance.RecoverKunai();
-            PlayerController.instance.RecoverKama();
             PlayerController.instance.RemoveSpawnedKunai();
             PlayerController.instance.RemoveSpawnedKama();
+
+            if(!PlayerController.instance.isMovingWithKama && !PlayerController.instance.isOnKama)
+            {
+                PlayerController.instance.RecoverKama();
+            }
+            
         }
     }
 
