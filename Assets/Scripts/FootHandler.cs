@@ -10,7 +10,7 @@ public class FootHandler : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Wood Ground"))
         {
             PlayerController.instance.isJumping = false;
-            PlayerController.instance.hasDash = false;
+            PlayerController.instance.DisableDash();
             PlayerController.instance.RecoverKunai();
             PlayerController.instance.RemoveSpawnedKunai();
             PlayerController.instance.RemoveSpawnedKama();

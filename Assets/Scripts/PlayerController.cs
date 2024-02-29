@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject kunaiPrefab;
     [SerializeField] private Transform kamaOrigin;
     [SerializeField] private GameObject kamaPrefab;
+    [SerializeField] private SpriteRenderer playerSpriteRenderer;
 
     public bool isJumping = false;
     public bool hasKama = true;
@@ -38,6 +39,7 @@ public class PlayerController : MonoBehaviour
 
     private float lerpTimer = 0f;
     private float dashTimer = 0f;
+    private float currentPlayerSpeed;
 
     //Instance
     public static PlayerController instance;
@@ -52,6 +54,8 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        currentPlayerSpeed = playerSpeed;
     }
 
     private void Start()
@@ -102,6 +106,12 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            Teleport();
+            ShootKunai();
+        }
+
         if (isOnKama) return;
 
         if (horizontal < 0f)
@@ -113,13 +123,7 @@ public class PlayerController : MonoBehaviour
             transform.localScale = new Vector3(1, 1, 1);
         }
 
-        rb.velocity = new Vector2(horizontal * playerSpeed, rb.velocity.y);
-
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            Teleport();
-            ShootKunai();
-        }
+        rb.velocity = new Vector2(horizontal * currentPlayerSpeed, rb.velocity.y);
 
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
@@ -140,7 +144,9 @@ public class PlayerController : MonoBehaviour
         {
             rb.transform.position = spawnedKama.transform.position;
             RemoveSpawnedKama();
-            hasDash = true;
+            RecoverKunai();
+            RemoveSpawnedKunai();
+            EnableDash();
             isJumping = true;
             isMovingWithKama = false;
             isOnKama = true;
@@ -160,7 +166,7 @@ public class PlayerController : MonoBehaviour
         rb.gravityScale = 0f;
         dashDirection = new Vector2(horizontal, vertical).normalized;
         isDashing = true;
-        hasDash = false;
+        DisableDash();
         if(spawnedKama != null)
         {
             RemoveSpawnedKama();
@@ -171,11 +177,13 @@ public class PlayerController : MonoBehaviour
     {
         rb.gravityScale = 0;
         rb.velocity = Vector2.zero;
+        currentPlayerSpeed = 0f;
     }
 
     public void DeactivateBreakTime()
     {
         rb.gravityScale = 1;
+        currentPlayerSpeed = playerSpeed;
     }
 
     public void ActivateBreakTimeWithTime(float breakTime)
@@ -188,8 +196,10 @@ public class PlayerController : MonoBehaviour
     {
         rb.gravityScale = 0;
         rb.velocity = Vector2.zero;
+        currentPlayerSpeed = 0f;
         yield return new WaitForSeconds(breakTime);
         rb.gravityScale = 1;
+        currentPlayerSpeed = playerSpeed;
     }
 
     private void Teleport()
@@ -199,9 +209,26 @@ public class PlayerController : MonoBehaviour
         rb.transform.position = spawnedKunai.transform.position;
         rb.velocity = Vector2.zero;
 
+        if (spawnedKama != null)
+        {
+            RemoveSpawnedKama();
+        }
+
         RemoveSpawnedKunai();
         ActivateBreakTimeWithTime(teleportBreakTime);
+        EnableDash();
+    }
+
+    public void EnableDash()
+    {
         hasDash = true;
+        playerSpriteRenderer.color = Color.blue;
+    }
+
+    public void DisableDash()
+    {
+        hasDash = false;
+        playerSpriteRenderer.color = Color.white;
     }
 
     private void ShootKunai()
