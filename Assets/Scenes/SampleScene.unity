@@ -6471,7 +6471,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerSpeed: 3
   jumpForce: 5
-  teleportBreakTime: 0.2
+  teleportBreakTime: 1
+  kamaBreakTime: 1
   kamaTeleportSpeed: 0.1
   dashTime: 0.35
   dashSpeed: 10

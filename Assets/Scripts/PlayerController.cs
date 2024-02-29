@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpForce = 5f;
     [Range(0f, 10f)]
     [SerializeField] private float teleportBreakTime = 0.2f;
+    [SerializeField] private float kamaBreakTime = 1f;
     [SerializeField] private float kamaTeleportSpeed = 0.1f;
     [SerializeField] private float dashTime = 0.35f;
     [SerializeField] private float dashSpeed = 10f;
@@ -77,11 +78,11 @@ public class PlayerController : MonoBehaviour
             dashTimer += Time.deltaTime;
             if (dashTimer > dashTime)
             {
-                Debug.Log("Finished Dash");
                 isDashing = false;
                 dashTimer = 0f;
                 rb.gravityScale = 1f;
                 isOnKama = false;
+                DeactivateBreakTime();
                 currentPlayerSpeed = playerSpeed;
             };
             return;
@@ -147,7 +148,7 @@ public class PlayerController : MonoBehaviour
             RemoveSpawnedKama();
             RecoverKunai();
             RemoveSpawnedKunai();
-            EnableDash();
+            ActivateBreakTimeWithTime(kamaBreakTime);
             isJumping = true;
             isMovingWithKama = false;
             isOnKama = true;
@@ -162,7 +163,6 @@ public class PlayerController : MonoBehaviour
 
     private void Dash()
     {
-        Debug.Log("Dashing");
         rb.velocity = Vector2.zero;
         rb.gravityScale = 0f;
         dashDirection = new Vector2(horizontal, vertical).normalized;
@@ -174,33 +174,52 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void ActivateBreakTime()
+    public void ActivateBreakTime(bool enableDash = true)
     {
+        StopAllCoroutines();
         rb.gravityScale = 0;
         rb.velocity = Vector2.zero;
         currentPlayerSpeed = 0f;
+
+        if (!enableDash) return;
+
+        EnableDash();
     }
 
     public void DeactivateBreakTime()
     {
+        StopAllCoroutines();
+        DisableDash();
         rb.gravityScale = 1;
         currentPlayerSpeed = playerSpeed;
+        isOnKama = false;
+        if (spawnedKama != null)
+        {
+            RemoveSpawnedKama();
+        }
     }
 
-    public void ActivateBreakTimeWithTime(float breakTime)
+    public void ActivateBreakTimeWithTime(float breakTime, bool enableDash = true)
     {
         StopAllCoroutines();
-        StartCoroutine(BreakTime(breakTime));
+        StartCoroutine(BreakTime(breakTime, enableDash));
     }
 
-    private IEnumerator BreakTime(float breakTime)
+    private IEnumerator BreakTime(float breakTime, bool enableDash = true)
     {
+        if(enableDash) EnableDash();
         rb.gravityScale = 0;
         rb.velocity = Vector2.zero;
         currentPlayerSpeed = 0f;
         yield return new WaitForSeconds(breakTime);
         rb.gravityScale = 1;
         currentPlayerSpeed = playerSpeed;
+        isOnKama = false;
+        DisableDash();
+        if (spawnedKama != null)
+        {
+            RemoveSpawnedKama();
+        }
     }
 
     private void Teleport()
@@ -217,7 +236,6 @@ public class PlayerController : MonoBehaviour
 
         RemoveSpawnedKunai();
         ActivateBreakTimeWithTime(teleportBreakTime);
-        EnableDash();
     }
 
     public void EnableDash()
@@ -236,7 +254,7 @@ public class PlayerController : MonoBehaviour
     {
         if(!hasKunai) return;
 
-        ActivateBreakTime();
+        ActivateBreakTime(false);
         hasKunai = false;
 
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -253,7 +271,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!hasKama) return;
 
-        ActivateBreakTime();
+        ActivateBreakTime(false);
         hasKama = false;
 
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
