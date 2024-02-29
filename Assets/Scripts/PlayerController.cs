@@ -82,6 +82,7 @@ public class PlayerController : MonoBehaviour
                 dashTimer = 0f;
                 rb.gravityScale = 1f;
                 isOnKama = false;
+                currentPlayerSpeed = playerSpeed;
             };
             return;
         }
