@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -9,24 +8,19 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpForce = 5f;
     [Range(0f, 10f)]
     [SerializeField] private float teleportBreakTime = 0.2f;
-    [SerializeField] private float kamaBreakTime = 1f;
-    [SerializeField] private float kamaTeleportSpeed = 0.1f;
     [SerializeField] private float dashTime = 0.35f;
     [SerializeField] private float dashSpeed = 10f;
 
     [SerializeField] private Transform kunaiOrigin;
     [SerializeField] private GameObject kunaiPrefab;
-    [SerializeField] private Transform kamaOrigin;
-    [SerializeField] private GameObject kamaPrefab;
+
     [SerializeField] private SpriteRenderer playerSpriteRenderer;
 
     public bool isJumping = false;
-    public bool hasKama = true;
+
     public bool hasKunai = true;
     public bool hasDash = false;
-    public bool isMovingWithKama = false;
     private bool isDashing = false;
-    public bool isOnKama = false;
 
     private Vector2 dashDirection;
 
@@ -36,11 +30,19 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
 
     private GameObject spawnedKunai = null;
-    private GameObject spawnedKama = null;
 
     private float lerpTimer = 0f;
     private float dashTimer = 0f;
     private float currentPlayerSpeed;
+
+    //[SerializeField] private float kamaBreakTime = 1f;
+    //[SerializeField] private float kamaTeleportSpeed = 0.1f;
+    //[SerializeField] private Transform kamaOrigin;
+    //[SerializeField] private GameObject kamaPrefab;
+    //public bool hasKama = true;
+    //public bool isMovingWithKama = false;
+    //public bool isOnKama = false;
+    //private GameObject spawnedKama = null;
 
     //Instance
     public static PlayerController instance;
@@ -68,53 +70,40 @@ public class PlayerController : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.R))
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+            RestartScene();
         }
 
         if (isDashing)
         {
-            rb.velocity = Vector2.zero;
-            rb.transform.position += new Vector3(dashDirection.x, dashDirection.y, 0f) * dashSpeed * Time.deltaTime;
-            dashTimer += Time.deltaTime;
-            if (dashTimer > dashTime)
-            {
-                isDashing = false;
-                dashTimer = 0f;
-                rb.gravityScale = 1f;
-                isOnKama = false;
-                DeactivateBreakTime();
-                currentPlayerSpeed = playerSpeed;
-            };
+            Dash();
             return;
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-
-            if (isJumping && hasDash)
-            {
-                Dash();
-                return;
-            }
-
             if (isJumping) return;
-
             Jump();
         }
 
-        if (isMovingWithKama)
-        {
-            LerpPlayerPosition();
-            return;
-        }
+        //if (isMovingWithKama)
+        //{
+        //    LerpPlayerPosition();
+        //    return;
+        //}
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
+            if (hasDash)
+            {
+                TryDash();
+                return;
+            }
             Teleport();
             ShootKunai();
+            
         }
 
-        if (isOnKama) return;
+        //if (isOnKama) return;
 
         if (horizontal < 0f)
         {
@@ -125,34 +114,39 @@ public class PlayerController : MonoBehaviour
             transform.localScale = new Vector3(1, 1, 1);
         }
 
-        rb.velocity = new Vector2(horizontal * currentPlayerSpeed, rb.velocity.y);
+        MovePlayer();
 
-        if (Input.GetKeyDown(KeyCode.Mouse1))
-        {
-            ThrowKama();
-        }
+        //if (Input.GetKeyDown(KeyCode.Mouse1))
+        //{
+        //    ThrowKama();
+        //}
     }
 
-    void LerpPlayerPosition()
+    private void MovePlayer()
     {
-        lerpTimer += Time.deltaTime;
+        if (isJumping) return;
+        rb.velocity = new Vector2(horizontal * currentPlayerSpeed, rb.velocity.y);
+    }
 
-        if (lerpTimer < kamaTeleportSpeed)
+    private void RestartScene()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+    }
+
+    private void Dash()
+    {
+        rb.velocity = Vector2.zero;
+        rb.transform.position += new Vector3(dashDirection.x, dashDirection.y, 0f) * dashSpeed * Time.deltaTime;
+        dashTimer += Time.deltaTime;
+        if (dashTimer > dashTime)
         {
-            float t = lerpTimer / kamaTeleportSpeed;
-            rb.transform.position = Vector3.Lerp(kamaOrigin.position, spawnedKama.transform.position, t);
-        }
-        else
-        {
-            rb.transform.position = spawnedKama.transform.position;
-            RemoveSpawnedKama();
-            RecoverKunai();
-            RemoveSpawnedKunai();
-            ActivateBreakTimeWithTime(kamaBreakTime);
-            isJumping = true;
-            isMovingWithKama = false;
-            isOnKama = true;
-        }
+            isDashing = false;
+            dashTimer = 0f;
+            rb.gravityScale = 1f;
+            //isOnKama = false;
+            DeactivateBreakTime();
+            currentPlayerSpeed = playerSpeed;
+        };
     }
 
     public void Jump()
@@ -161,20 +155,32 @@ public class PlayerController : MonoBehaviour
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
     }
 
-    private void Dash()
+    private void TryDash()
     {
         rb.velocity = Vector2.zero;
         rb.gravityScale = 0f;
-        dashDirection = new Vector2(horizontal, vertical).normalized;
         isDashing = true;
+
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        dashDirection = (mousePosition - rb.transform.position).normalized;
+
+        float angle = Mathf.Atan2(dashDirection.y, dashDirection.x);
+        int octant = Mathf.RoundToInt(8 * angle / (2 * Mathf.PI) + 8) % 8;
+        float quantizedAngle = octant * (2 * Mathf.PI) / 8;
+        dashDirection = new Vector2(Mathf.Cos(quantizedAngle), Mathf.Sin(quantizedAngle));
+
+        Debug.Log(dashDirection);
+
         DisableDash();
-        if(spawnedKama != null)
-        {
-            RemoveSpawnedKama();
-        }
+
+        //if(spawnedKama != null)
+        //{
+        //    RemoveSpawnedKama();
+        //}
     }
 
-    public void ActivateBreakTime(bool enableDash = true)
+    public void ActivateBreakTime(bool enableDash = false)
     {
         StopAllCoroutines();
         rb.gravityScale = 0;
@@ -192,20 +198,21 @@ public class PlayerController : MonoBehaviour
         DisableDash();
         rb.gravityScale = 1;
         currentPlayerSpeed = playerSpeed;
-        isOnKama = false;
-        if (spawnedKama != null)
-        {
-            RemoveSpawnedKama();
-        }
+
+        //isOnKama = false;
+        //if (spawnedKama != null)
+        //{
+        //    RemoveSpawnedKama();
+        //}
     }
 
-    public void ActivateBreakTimeWithTime(float breakTime, bool enableDash = true)
+    public void ActivateBreakTimeWithTime(float breakTime, bool enableDash = false)
     {
         StopAllCoroutines();
         StartCoroutine(BreakTime(breakTime, enableDash));
     }
 
-    private IEnumerator BreakTime(float breakTime, bool enableDash = true)
+    private IEnumerator BreakTime(float breakTime, bool enableDash = false)
     {
         if(enableDash) EnableDash();
         rb.gravityScale = 0;
@@ -214,12 +221,12 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(breakTime);
         rb.gravityScale = 1;
         currentPlayerSpeed = playerSpeed;
-        isOnKama = false;
+
         DisableDash();
-        if (spawnedKama != null)
-        {
-            RemoveSpawnedKama();
-        }
+
+        //isOnKama = false;        
+        //RemoveSpawnedKama();
+
     }
 
     private void Teleport()
@@ -229,17 +236,15 @@ public class PlayerController : MonoBehaviour
         rb.transform.position = spawnedKunai.transform.position;
         rb.velocity = Vector2.zero;
 
-        if (spawnedKama != null)
-        {
-            RemoveSpawnedKama();
-        }
-
         RemoveSpawnedKunai();
-        ActivateBreakTimeWithTime(teleportBreakTime);
+        ActivateBreakTimeWithTime(teleportBreakTime, true);
+
+        //RemoveSpawnedKama();
     }
 
     public void EnableDash()
     {
+        dashTimer = 0f;
         hasDash = true;
         playerSpriteRenderer.color = Color.blue;
     }
@@ -248,13 +253,14 @@ public class PlayerController : MonoBehaviour
     {
         hasDash = false;
         playerSpriteRenderer.color = Color.white;
+
     }
 
     private void ShootKunai()
     {
         if(!hasKunai) return;
 
-        ActivateBreakTime(false);
+        ActivateBreakTime();
         hasKunai = false;
 
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -265,31 +271,6 @@ public class PlayerController : MonoBehaviour
         spawnedKunai = Instantiate(kunaiPrefab, kunaiOrigin.position, Quaternion.Euler(0, 0, angle));
 
         kunaiOrigin.gameObject.SetActive(false);
-    }
-
-    private void ThrowKama()
-    {
-        if (!hasKama) return;
-
-        ActivateBreakTime(false);
-        hasKama = false;
-
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 direction = (mousePos - kunaiOrigin.position).normalized;
-
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-
-        spawnedKama = Instantiate(kamaPrefab, kamaOrigin.position, Quaternion.Euler(0, 0, angle));
-
-        kamaOrigin.gameObject.SetActive(false);
-    }
-
-    public void MovePlayerToKama()
-    {
-        rb.gravityScale = 0;
-        rb.velocity = Vector2.zero;
-        lerpTimer = 0f;
-        isMovingWithKama = true;
     }
 
     public void RemoveSpawnedKunai()
@@ -304,16 +285,64 @@ public class PlayerController : MonoBehaviour
         kunaiOrigin.gameObject.SetActive(true);
     }
 
-    public void RemoveSpawnedKama()
-    {
-        if (isMovingWithKama) return;
-        Destroy(spawnedKama);
-        spawnedKama = null;
-    }
+    //private void ThrowKama()
+    //{
+    //    if (!hasKama) return;
 
-    public void RecoverKama()
-    {
-        hasKama = true;
-        kamaOrigin.gameObject.SetActive(true);
-    }
+    //    ActivateBreakTime();
+    //    hasKama = false;
+
+    //    Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+    //    Vector2 direction = (mousePos - kunaiOrigin.position).normalized;
+
+    //    float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+    //    spawnedKama = Instantiate(kamaPrefab, kamaOrigin.position, Quaternion.Euler(0, 0, angle));
+
+    //    kamaOrigin.gameObject.SetActive(false);
+    //}
+
+    //public void MovePlayerToKama()
+    //{
+    //rb.gravityScale = 0;
+    //rb.velocity = Vector2.zero;
+    //lerpTimer = 0f;
+    //isMovingWithKama = true;
+    //}
+
+    //public void RemoveSpawnedKama()
+    //{
+    //if (spawnedKama == null) return;
+    //if (isMovingWithKama) return;
+    //Destroy(spawnedKama);
+    //spawnedKama = null;
+    //}
+
+    //public void RecoverKama()
+    //{
+    //hasKama = true;
+    //kamaOrigin.gameObject.SetActive(true);
+    //}
+
+    //void LerpPlayerPosition()
+    //{
+    //    lerpTimer += Time.deltaTime;
+
+    //    if (lerpTimer < kamaTeleportSpeed)
+    //    {
+    //        float t = lerpTimer / kamaTeleportSpeed;
+    //        rb.transform.position = Vector3.Lerp(kamaOrigin.position, spawnedKama.transform.position, t);
+    //    }
+    //    else
+    //    {
+    //        rb.transform.position = spawnedKama.transform.position;
+    //        RemoveSpawnedKama();
+    //        RecoverKunai();
+    //        RemoveSpawnedKunai();
+    //        ActivateBreakTimeWithTime(kamaBreakTime);
+    //        isJumping = true;
+    //        isMovingWithKama = false;
+    //        isOnKama = true;
+    //    }
+    //}
 }
