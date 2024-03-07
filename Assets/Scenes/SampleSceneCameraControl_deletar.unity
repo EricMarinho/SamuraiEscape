@@ -362,7 +362,9 @@ MonoBehaviour:
   cameraHeight: 0
   horizontalMovAmount: 5
   verticalMovAmount: 5
-  fixedCamera: 1
+  fixedCamera: 0
+  cameraMovSpeed: 0
+  lag: 1
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
