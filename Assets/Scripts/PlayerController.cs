@@ -4,17 +4,20 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Player Movement")]
     [SerializeField] private float playerSpeed = 5f;
     [SerializeField] private float jumpForce = 5f;
-    [Range(0f, 10f)]
-    [SerializeField] private float teleportBreakTime = 0.2f;
     [SerializeField] private float dashTime = 0.35f;
     [SerializeField] private float dashSpeed = 10f;
+    [SerializeField] private SpriteRenderer playerSpriteRenderer;
 
+    [Header("Kunai")]
+    [SerializeField] private float teleportBreakTime = 1f;
     [SerializeField] private Transform kunaiOrigin;
     [SerializeField] private GameObject kunaiPrefab;
 
-    [SerializeField] private SpriteRenderer playerSpriteRenderer;
+    [Header("Crystal")]
+    [SerializeField] private float crystalBreakTime = 1f;
 
     public bool isJumping = false;
 
@@ -64,6 +67,12 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        GameEvents.Instance.OnCrystalCollected += OnCrystalCollected;
+    }
+
+    private void OnDestroy()
+    {
+        GameEvents.Instance.OnCrystalCollected -= OnCrystalCollected;
     }
 
     private void Update()
@@ -71,12 +80,6 @@ public class PlayerController : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.R))
         {
             RestartScene();
-        }
-
-        if (isDashing)
-        {
-            Dash();
-            return;
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
@@ -99,8 +102,13 @@ public class PlayerController : MonoBehaviour
                 return;
             }
             Teleport();
-            ShootKunai();
-            
+            ShootKunai();  
+        }
+
+        if (isDashing)
+        {
+            Dash();
+            return;
         }
 
         //if (isOnKama) return;
@@ -253,7 +261,6 @@ public class PlayerController : MonoBehaviour
     {
         hasDash = false;
         playerSpriteRenderer.color = Color.white;
-
     }
 
     private void ShootKunai()
@@ -283,6 +290,20 @@ public class PlayerController : MonoBehaviour
     {
         hasKunai = true;
         kunaiOrigin.gameObject.SetActive(true);
+    }
+
+    private void OnCrystalCollected()
+    {
+        StopDash();
+        RemoveSpawnedKunai();
+        RecoverKunai();
+        ActivateBreakTimeWithTime(crystalBreakTime);
+    }
+
+    private void StopDash()
+    {
+        isDashing = false;
+        dashTimer = 0f;
     }
 
     //private void ThrowKama()

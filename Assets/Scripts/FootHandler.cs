@@ -14,6 +14,8 @@ public class FootHandler : MonoBehaviour
             PlayerController.instance.RemoveSpawnedKunai();
             PlayerController.instance.DisableDash();
 
+            GameEvents.Instance.OnCrystalRestored?.Invoke();
+
             //PlayerController.instance.RemoveSpawnedKama();
 
             //if(!PlayerController.instance.isMovingWithKama && !PlayerController.instance.isOnKama)
