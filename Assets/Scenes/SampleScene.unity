@@ -2642,7 +2642,11 @@ MonoBehaviour:
   cameraHeight: 10
   horizontalMovAmount: 17.5
   verticalMovAmount: 9.5
+  cameraMovSpeed: 12
+  minCameraDistPlayer: 0
   fixedCamera: 0
+  fixedCameraWindow: 0
+  lerp: 1
 --- !u!1 &529533548
 GameObject:
   m_ObjectHideFlags: 0
@@ -6477,7 +6481,7 @@ MonoBehaviour:
   teleportBreakTime: 1
   kunaiOrigin: {fileID: 220836389}
   kunaiPrefab: {fileID: 4599086513711698186, guid: 05ec7812172c2da4dadb18945f864534, type: 3}
-  crystalBreakTime: 0.2
+  crystalBreakTime: 1
   isJumping: 0
   hasKunai: 1
   hasDash: 0

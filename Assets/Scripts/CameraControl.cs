@@ -16,34 +16,26 @@ public class CameraControl : MonoBehaviour
     public float horizontalMovAmount;
     public float verticalMovAmount;
     
-    public float cameraMovSpeed;
+    public float cameraMovSpeed = 10f;
     private Vector3 destination;
 
-    public float minCameraDistPlayer;
+    public float minCameraDistPlayer = 1f;
 
-    public bool fixedCamera;
-    public bool fixedCameraWindow;
-    public bool lerp;
+    public bool fixedCamera = false;
+    public bool fixedCameraWindow = false;
+    public bool lerp = true;
 
     Vector3 camPos;
 
     // Start is called before the first frame update
     void Start()
-    {
-
-
-        fixedCamera = false;
-        fixedCameraWindow = true;
-        lerp = false;
-        cameraMovSpeed = 5f;
-        minCameraDistPlayer = 1;
-        
+    {        
         cameraHeight = Camera.main.orthographicSize * 2;
         cameraWidth = Camera.main.aspect * cameraHeight;
         camPos = Camera.main.transform.position;
         destination = camPos;
-        horizontalMovAmount = cameraWidth;
-        verticalMovAmount = cameraHeight;
+        //horizontalMovAmount = cameraWidth;
+        //verticalMovAmount = cameraHeight;
     }
 
     void moveCamera()
