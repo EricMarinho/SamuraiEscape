@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float dashTime = 0.35f;
     [SerializeField] private float dashSpeed = 10f;
     [SerializeField] private SpriteRenderer playerSpriteRenderer;
+    [SerializeField] private BoxCollider2D barrierCollider;
 
     [Header("Kunai")]
     [SerializeField] private float teleportBreakTime = 1f;
@@ -148,8 +149,7 @@ public class PlayerController : MonoBehaviour
         dashTimer += Time.deltaTime;
         if (dashTimer > dashTime)
         {
-            isDashing = false;
-            dashTimer = 0f;
+            StopDash();
             rb.gravityScale = 1f;
             //isOnKama = false;
             DeactivateBreakTime();
@@ -163,11 +163,22 @@ public class PlayerController : MonoBehaviour
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
     }
 
+    private void EnableDashCollider()
+    {
+        barrierCollider.enabled = true;
+    }
+
+    private void DisableDashCollider()
+    {
+        barrierCollider.enabled = false;
+    }
+
     private void TryDash()
     {
         rb.velocity = Vector2.zero;
         rb.gravityScale = 0f;
         isDashing = true;
+        EnableDashCollider();
 
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
@@ -304,6 +315,7 @@ public class PlayerController : MonoBehaviour
     {
         isDashing = false;
         dashTimer = 0f;
+        DisableDashCollider();
     }
 
     //private void ThrowKama()
