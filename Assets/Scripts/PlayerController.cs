@@ -185,9 +185,9 @@ public class PlayerController : MonoBehaviour
         dashDirection = (mousePosition - rb.transform.position).normalized;
 
         float angle = Mathf.Atan2(dashDirection.y, dashDirection.x);
-        int octant = Mathf.RoundToInt(8 * angle / (2 * Mathf.PI) + 8) % 8;
-        float quantizedAngle = octant * (2 * Mathf.PI) / 8;
-        dashDirection = new Vector2(Mathf.Cos(quantizedAngle), Mathf.Sin(quantizedAngle));
+        //int octant = Mathf.RoundToInt(8 * angle / (2 * Mathf.PI) + 8) % 8;
+        //float quantizedAngle = octant * (2 * Mathf.PI) / 8;
+        dashDirection = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
 
         Debug.Log(dashDirection);
 
@@ -305,10 +305,10 @@ public class PlayerController : MonoBehaviour
 
     private void OnCrystalCollected()
     {
-        StopDash();
+        //StopDash();
         RemoveSpawnedKunai();
         RecoverKunai();
-        ActivateBreakTimeWithTime(crystalBreakTime);
+        //ActivateBreakTimeWithTime(crystalBreakTime);
     }
 
     private void StopDash()

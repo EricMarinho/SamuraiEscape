@@ -8,6 +8,7 @@ TagManager:
   - Death
   - Wood
   - Wood Ground
+  - Barrier
   layers:
   - Default
   - TransparentFX
