@@ -28,8 +28,8 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 dashDirection;
 
-    private float horizontal => Input.GetAxis("Horizontal");
-    private float vertical => Input.GetAxis("Vertical");
+    private float horizontal => Input.GetAxisRaw("Horizontal");
+    private float vertical => Input.GetAxisRaw("Vertical");
 
     private Rigidbody2D rb;
 
@@ -116,11 +116,11 @@ public class PlayerController : MonoBehaviour
 
         if (horizontal < 0f)
         {
-            transform.localScale = new Vector3(-1, 1, 1);
+            transform.localScale = new Vector3(-1, 2, 1);
         }
         else if (horizontal > 0f)
         {
-            transform.localScale = new Vector3(1, 1, 1);
+            transform.localScale = new Vector3(1, 2, 1);
         }
 
         MovePlayer();
