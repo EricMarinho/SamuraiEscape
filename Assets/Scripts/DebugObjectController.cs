@@ -6,6 +6,7 @@ public class DebugObjectController : MonoBehaviour
 {
 
     [SerializeField] Camera cam;
+    [SerializeField] GameObject poi;
 
     public float velocity = 0.1f;
 
@@ -39,9 +40,12 @@ public class DebugObjectController : MonoBehaviour
 
         if (Input.GetKey("r"))
         {
-            this.transform.position = new Vector3(0, 0, 0);
+            this.transform.position = new Vector3(-9.25f, -2.25f, 0);
 
-            cam.transform.position = new Vector3(0, this.transform.position.y + cam.orthographicSize * 0.5f, -10);
+            //cam.transform.position = new Vector3(0, this.transform.position.y + cam.orthographicSize * 0.5f, -10);
+            cam.transform.position = poi.transform.position;
+       
+
         }
     }
 }
