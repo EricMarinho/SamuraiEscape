@@ -23,5 +23,12 @@ public class KunaiController : MonoBehaviour
     {
         kunaiSpeed = 0;
         PlayerController.instance.DeactivateBreakTime();
+
+        if(collision.gameObject.CompareTag("Barrier"))
+        {
+            PlayerController.instance.RemoveSpawnedKunai();
+            if (PlayerController.instance.isJumping) return;
+            PlayerController.instance.RecoverKunai();
+        }
     }
 }

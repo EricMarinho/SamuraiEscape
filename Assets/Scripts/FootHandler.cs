@@ -13,8 +13,10 @@ public class FootHandler : MonoBehaviour
             PlayerController.instance.RecoverKunai();
             PlayerController.instance.RemoveSpawnedKunai();
             PlayerController.instance.DisableDash();
-
             GameEvents.Instance.OnCrystalRestored?.Invoke();
+
+            if (PlayerController.instance.isJumping) return;
+            PlayerController.instance.RecoverKunai();
 
             //PlayerController.instance.RemoveSpawnedKama();
 

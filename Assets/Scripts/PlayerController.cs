@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float dashTime = 0.35f;
     [SerializeField] private float dashSpeed = 10f;
     [SerializeField] private SpriteRenderer playerSpriteRenderer;
+    [SerializeField] private BoxCollider2D barrierCollider;
 
     [Header("Kunai")]
     [SerializeField] private float teleportBreakTime = 1f;
@@ -27,8 +28,8 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 dashDirection;
 
-    private float horizontal => Input.GetAxis("Horizontal");
-    private float vertical => Input.GetAxis("Vertical");
+    private float horizontal => Input.GetAxisRaw("Horizontal");
+    private float vertical => Input.GetAxisRaw("Vertical");
 
     private Rigidbody2D rb;
 
@@ -115,11 +116,11 @@ public class PlayerController : MonoBehaviour
 
         if (horizontal < 0f)
         {
-            transform.localScale = new Vector3(-1, 1, 1);
+            transform.localScale = new Vector3(-1, 2, 1);
         }
         else if (horizontal > 0f)
         {
-            transform.localScale = new Vector3(1, 1, 1);
+            transform.localScale = new Vector3(1, 2, 1);
         }
 
         MovePlayer();
@@ -148,8 +149,7 @@ public class PlayerController : MonoBehaviour
         dashTimer += Time.deltaTime;
         if (dashTimer > dashTime)
         {
-            isDashing = false;
-            dashTimer = 0f;
+            StopDash();
             rb.gravityScale = 1f;
             //isOnKama = false;
             DeactivateBreakTime();
@@ -163,20 +163,31 @@ public class PlayerController : MonoBehaviour
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
     }
 
+    private void EnableDashCollider()
+    {
+        barrierCollider.enabled = true;
+    }
+
+    private void DisableDashCollider()
+    {
+        barrierCollider.enabled = false;
+    }
+
     private void TryDash()
     {
         rb.velocity = Vector2.zero;
         rb.gravityScale = 0f;
         isDashing = true;
+        EnableDashCollider();
 
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         dashDirection = (mousePosition - rb.transform.position).normalized;
 
         float angle = Mathf.Atan2(dashDirection.y, dashDirection.x);
-        int octant = Mathf.RoundToInt(8 * angle / (2 * Mathf.PI) + 8) % 8;
-        float quantizedAngle = octant * (2 * Mathf.PI) / 8;
-        dashDirection = new Vector2(Mathf.Cos(quantizedAngle), Mathf.Sin(quantizedAngle));
+        //int octant = Mathf.RoundToInt(8 * angle / (2 * Mathf.PI) + 8) % 8;
+        //float quantizedAngle = octant * (2 * Mathf.PI) / 8;
+        dashDirection = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
 
         Debug.Log(dashDirection);
 
@@ -294,16 +305,17 @@ public class PlayerController : MonoBehaviour
 
     private void OnCrystalCollected()
     {
-        StopDash();
+        //StopDash();
         RemoveSpawnedKunai();
         RecoverKunai();
-        ActivateBreakTimeWithTime(crystalBreakTime);
+        //ActivateBreakTimeWithTime(crystalBreakTime);
     }
 
     private void StopDash()
     {
         isDashing = false;
         dashTimer = 0f;
+        DisableDashCollider();
     }
 
     //private void ThrowKama()
