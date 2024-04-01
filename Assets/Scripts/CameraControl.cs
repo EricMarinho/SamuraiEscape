@@ -33,8 +33,8 @@ public class CameraControl : MonoBehaviour
         cameraWidth = Camera.main.aspect * cameraHeight;
         camPos = Camera.main.transform.position;
         destination = camPos;
-        //horizontalMovAmount = cameraWidth;
-        //verticalMovAmount = cameraHeight;
+        horizontalMovAmount = cameraWidth;
+        verticalMovAmount = cameraHeight;
     }
 
     void moveCamera()
