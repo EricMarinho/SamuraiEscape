@@ -31,4 +31,5 @@ public class KunaiController : MonoBehaviour
             PlayerController.instance.RecoverKunai();
         }
     }
+
 }

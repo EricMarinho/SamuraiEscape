@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour
 
     public bool isJumping = false;
 
+    public float jumpTimeStart = 0;
+
     public bool hasKunai = true;
     public bool hasDash = false;
     private bool isDashing = false;
@@ -160,6 +162,9 @@ public class PlayerController : MonoBehaviour
     public void Jump()
     {
         isJumping = true;
+
+        jumpTimeStart = Time.time;
+
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
     }
 
