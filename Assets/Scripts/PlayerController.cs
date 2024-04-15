@@ -20,6 +20,9 @@ public class PlayerController : MonoBehaviour
     [Header("Crystal")]
     [SerializeField] private float crystalBreakTime = 1f;
 
+    private Animator playerAnimation;
+    private SpriteRenderer playerSprite;
+
     public bool isJumping = false;
 
     public bool hasKunai = true;
@@ -27,7 +30,6 @@ public class PlayerController : MonoBehaviour
     private bool isDashing = false;
 
     private Vector2 dashDirection;
-
     private float horizontal => Input.GetAxis("Horizontal");
     private float vertical => Input.GetAxis("Vertical");
 
@@ -69,6 +71,9 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         GameEvents.Instance.OnCrystalCollected += OnCrystalCollected;
+
+        playerAnimation = GetComponent<Animator>();
+        playerSprite = GetComponent<SpriteRenderer>();
     }
 
     private void OnDestroy()
@@ -135,6 +140,13 @@ public class PlayerController : MonoBehaviour
     {
         if (isJumping) return;
         rb.velocity = new Vector2(horizontal * currentPlayerSpeed, rb.velocity.y);
+
+        playerAnimation.SetFloat("Moving", Math.Abs(horizontal));
+
+        if (horizontal > 0f) this.transform.Rotate(0, 0, 0);
+        else if (horizontal < 0f) this.transform.Rotate(0, 0, 0);
+
+        Debug.Log(horizontal);
     }
 
     private void RestartScene()
