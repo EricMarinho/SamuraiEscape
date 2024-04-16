@@ -1,9 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 public class FootHandler : MonoBehaviour
 {
+
+    private Animator playerAnimation;
+
+    private void Start()
+    {
+        playerAnimation = GetComponentInParent<Animator>();   
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -25,6 +33,7 @@ public class FootHandler : MonoBehaviour
             //    PlayerController.instance.RecoverKama();
             //}
 
+            playerAnimation.SetBool("Jumping", PlayerController.instance.isJumping);
         }
     }
 

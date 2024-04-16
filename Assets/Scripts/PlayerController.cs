@@ -173,6 +173,8 @@ public class PlayerController : MonoBehaviour
     {
         isJumping = true;
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+
+        playerAnimation.SetBool("Jumping", isJumping);
     }
 
     private void EnableDashCollider()
