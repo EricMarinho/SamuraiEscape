@@ -279,7 +279,7 @@ public class PlayerController : MonoBehaviour
     {
         dashTimer = 0f;
         hasDash = true;
-        playerSpriteRenderer.color = Color.blue;
+        playerSpriteRenderer.color = Color.yellow;
     }
 
     public void DisableDash()
