@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpForce = 5f;
     [SerializeField] private float dashTime = 0.35f;
     [SerializeField] private float dashSpeed = 10f;
+    [SerializeField] private float playerMidairSpeed = 0.5f;
     [SerializeField] private SpriteRenderer playerSpriteRenderer;
     [SerializeField] private BoxCollider2D barrierCollider;
 
@@ -138,14 +139,35 @@ public class PlayerController : MonoBehaviour
 
     private void MovePlayer()
     {
-        if (isJumping) return;
-        rb.velocity = new Vector2(horizontal * currentPlayerSpeed, rb.velocity.y);
+        // Check if the player is currently jumping
+        if (isJumping)
+        {
+            // Calculate the horizontal velocity change based on mid-air speed
+            Vector2 midairVelocityChange = new Vector2(horizontal * playerMidairSpeed * Time.deltaTime, 0);
+            rb.velocity += midairVelocityChange;
 
-        playerAnimation.SetFloat("Moving", Math.Abs(horizontal));
+            // Limit the horizontal velocity to currentPlayerSpeed
+            float clampedVelocityX = Mathf.Clamp(rb.velocity.x, -currentPlayerSpeed, currentPlayerSpeed);
+            rb.velocity = new Vector2(clampedVelocityX, rb.velocity.y);
+        }
+        else
+        {
+            // Player is on the ground, move horizontally at currentPlayerSpeed
+            rb.velocity = new Vector2(horizontal * currentPlayerSpeed, rb.velocity.y);
+        }
 
-        if (horizontal > 0f) this.transform.Rotate(0, 0, 0);
-        else if (horizontal < 0f) this.transform.Rotate(0, 0, 0);
+        // Update the animator parameter for movement
+        playerAnimation.SetFloat("Moving", Mathf.Abs(horizontal));
 
+        // Flip the player's sprite based on movement direction
+        if (horizontal < 0f)
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
+        else if (horizontal > 0f)
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+        }
         Debug.Log(horizontal);
     }
 
