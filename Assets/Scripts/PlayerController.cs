@@ -188,6 +188,7 @@ public class PlayerController : MonoBehaviour
             //isOnKama = false;
             DeactivateBreakTime();
             currentPlayerSpeed = playerSpeed;
+            rb.velocity = new Vector2(dashDirection.x * dashSpeed, dashDirection.y * rb.velocity.y);
         };
     }
 
