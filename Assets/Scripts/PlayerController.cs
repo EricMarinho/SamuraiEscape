@@ -82,6 +82,12 @@ public class PlayerController : MonoBehaviour
         GameEvents.Instance.OnCrystalCollected -= OnCrystalCollected;
     }
 
+    private void FixedUpdate()
+    {
+        MovePlayer();
+        DashFixed();
+    }
+
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.R))
@@ -114,7 +120,7 @@ public class PlayerController : MonoBehaviour
 
         if (isDashing)
         {
-            Dash();
+            DashUpdate();
             return;
         }
 
@@ -129,8 +135,6 @@ public class PlayerController : MonoBehaviour
             transform.localScale = new Vector3(1, 1, 1);
         }
 
-        MovePlayer();
-
         //if (Input.GetKeyDown(KeyCode.Mouse1))
         //{
         //    ThrowKama();
@@ -143,7 +147,7 @@ public class PlayerController : MonoBehaviour
         if (isJumping)
         {
             // Calculate the horizontal velocity change based on mid-air speed
-            Vector2 midairVelocityChange = new Vector2(horizontal * playerMidairSpeed * Time.deltaTime, 0);
+            Vector2 midairVelocityChange = new Vector2(horizontal * playerMidairSpeed, 0);
             rb.velocity += midairVelocityChange;
 
             // Limit the horizontal velocity to currentPlayerSpeed
@@ -168,7 +172,6 @@ public class PlayerController : MonoBehaviour
         {
             transform.localScale = new Vector3(1, 1, 1);
         }
-        Debug.Log(horizontal);
     }
 
     private void RestartScene()
@@ -176,10 +179,16 @@ public class PlayerController : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
 
-    private void Dash()
+    private void DashFixed()
     {
+        if (!isDashing) return;
+        
         rb.velocity = Vector2.zero;
         rb.transform.position += new Vector3(dashDirection.x, dashDirection.y, 0f) * dashSpeed * Time.deltaTime;
+    }
+
+    private void DashUpdate()
+    {
         dashTimer += Time.deltaTime;
         if (dashTimer > dashTime)
         {

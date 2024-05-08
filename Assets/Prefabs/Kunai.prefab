@@ -94,7 +94,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4599086513711698186}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -145,6 +145,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kunaiSpeed: 20
+  kunaiRadius: 0.2
+  kunaiDetectingDistance: 0.05
 --- !u!50 &-8027269814935091673
 Rigidbody2D:
   serializedVersion: 4
