@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float dashTime = 0.35f;
     [SerializeField] private float dashSpeed = 10f;
     [SerializeField] private float playerMidairSpeed = 0.5f;
+    [SerializeField] private float fallVelocityLimit = -10f;
     [SerializeField] private SpriteRenderer playerSpriteRenderer;
     [SerializeField] private BoxCollider2D barrierCollider;
 
@@ -133,6 +134,11 @@ public class PlayerController : MonoBehaviour
         else if (horizontal > 0f)
         {
             transform.localScale = new Vector3(1, 1, 1);
+        }
+
+        if (rb.velocity.y < fallVelocityLimit)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, fallVelocityLimit);
         }
 
         //if (Input.GetKeyDown(KeyCode.Mouse1))

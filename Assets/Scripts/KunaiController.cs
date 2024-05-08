@@ -24,10 +24,10 @@ public class KunaiController : MonoBehaviour
         RaycastHit2D hit = Physics2D.CircleCast(rb.transform.position, kunaiRadius, rb.transform.position, kunaiDetectingDistance);
         if (hit.collider != null)
         {
-            Debug.Log(hit.collider.name);
             if (hit.collider.CompareTag("Player"))
                 return;
 
+            Debug.Log(hit.collider.name);
             kunaiSpeed = 0;
             PlayerController.instance.DeactivateBreakTime();
 
