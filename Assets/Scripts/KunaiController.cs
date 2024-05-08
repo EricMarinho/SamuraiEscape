@@ -19,6 +19,7 @@ public class KunaiController : MonoBehaviour
         rb.velocity = transform.right * kunaiSpeed * Time.timeScale;
     }
 
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         kunaiSpeed = 0;

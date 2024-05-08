@@ -168,12 +168,12 @@ public class PlayerController : MonoBehaviour
         {
             transform.localScale = new Vector3(1, 1, 1);
         }
-        Debug.Log(horizontal);
+        //Debug.Log(horizontal);
     }
 
     private void RestartScene()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+        UnityEngine.SceneManagement.SceneManager.LoadScene("PlayTest");
     }
 
     private void Dash()
@@ -287,7 +287,10 @@ public class PlayerController : MonoBehaviour
     private void Teleport()
     {
         if(spawnedKunai == null) return;
- 
+
+
+        this.GetComponentInChildren<TelleportEffects>().Spawn();
+
         rb.transform.position = spawnedKunai.transform.position;
         rb.velocity = Vector2.zero;
 
@@ -295,6 +298,7 @@ public class PlayerController : MonoBehaviour
         ActivateBreakTimeWithTime(teleportBreakTime, true);
 
         //RemoveSpawnedKama();
+
     }
 
     public void EnableDash()
@@ -323,6 +327,8 @@ public class PlayerController : MonoBehaviour
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
         spawnedKunai = Instantiate(kunaiPrefab, kunaiOrigin.position, Quaternion.Euler(0, 0, angle));
+
+        Debug.Log("ANGULO " + angle);
 
         kunaiOrigin.gameObject.SetActive(false);
     }
