@@ -20,13 +20,7 @@ public class KunaiController : MonoBehaviour
     private void Update()
     {
         rb.velocity = transform.right * kunaiSpeed * Time.timeScale;
-    }
 
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        kunaiSpeed = 0;
-        PlayerController.instance.DeactivateBreakTime();
         RaycastHit2D hit = Physics2D.CircleCast(rb.transform.position, kunaiRadius, rb.transform.position, kunaiDetectingDistance);
         if (hit.collider != null)
         {
@@ -45,6 +39,7 @@ public class KunaiController : MonoBehaviour
             }
         }
     }
+
 
     //private void OnCollisionEnter2D(Collision2D collision)
     //{
