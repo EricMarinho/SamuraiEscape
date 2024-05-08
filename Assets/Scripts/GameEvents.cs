@@ -10,6 +10,7 @@ public class GameEvents : MonoBehaviour
 
     public Action OnCrystalCollected;
     public Action OnCrystalRestored;
+    public Action OnEndGame;
 
     private void Awake()
     {

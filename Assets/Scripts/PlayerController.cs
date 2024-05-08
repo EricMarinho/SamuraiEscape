@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float dashTime = 0.35f;
     [SerializeField] private float dashSpeed = 10f;
     [SerializeField] private float playerMidairSpeed = 0.5f;
+    [SerializeField] private float fallVelocityLimit = -10f;
     [SerializeField] private SpriteRenderer playerSpriteRenderer;
     [SerializeField] private BoxCollider2D barrierCollider;
 
@@ -82,6 +83,12 @@ public class PlayerController : MonoBehaviour
         GameEvents.Instance.OnCrystalCollected -= OnCrystalCollected;
     }
 
+    private void FixedUpdate()
+    {
+        MovePlayer();
+        DashFixed();
+    }
+
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.R))
@@ -114,7 +121,7 @@ public class PlayerController : MonoBehaviour
 
         if (isDashing)
         {
-            Dash();
+            DashUpdate();
             return;
         }
 
@@ -129,7 +136,10 @@ public class PlayerController : MonoBehaviour
             transform.localScale = new Vector3(1, 1, 1);
         }
 
-        MovePlayer();
+        if (rb.velocity.y < fallVelocityLimit)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, fallVelocityLimit);
+        }
 
         //if (Input.GetKeyDown(KeyCode.Mouse1))
         //{
@@ -143,7 +153,7 @@ public class PlayerController : MonoBehaviour
         if (isJumping)
         {
             // Calculate the horizontal velocity change based on mid-air speed
-            Vector2 midairVelocityChange = new Vector2(horizontal * playerMidairSpeed * Time.deltaTime, 0);
+            Vector2 midairVelocityChange = new Vector2(horizontal * playerMidairSpeed, 0);
             rb.velocity += midairVelocityChange;
 
             // Limit the horizontal velocity to currentPlayerSpeed
@@ -168,6 +178,7 @@ public class PlayerController : MonoBehaviour
         {
             transform.localScale = new Vector3(1, 1, 1);
         }
+
         //Debug.Log(horizontal);
     }
 
@@ -176,10 +187,16 @@ public class PlayerController : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene("PlayTest");
     }
 
-    private void Dash()
+    private void DashFixed()
     {
+        if (!isDashing) return;
+        
         rb.velocity = Vector2.zero;
         rb.transform.position += new Vector3(dashDirection.x, dashDirection.y, 0f) * dashSpeed * Time.deltaTime;
+    }
+
+    private void DashUpdate()
+    {
         dashTimer += Time.deltaTime;
         if (dashTimer > dashTime)
         {
@@ -188,6 +205,7 @@ public class PlayerController : MonoBehaviour
             //isOnKama = false;
             DeactivateBreakTime();
             currentPlayerSpeed = playerSpeed;
+            rb.velocity = new Vector2(dashDirection.x * dashSpeed, dashDirection.y * rb.velocity.y);
         };
     }
 
