@@ -1309,7 +1309,7 @@ GameObject:
   - component: {fileID: 654031128}
   - component: {fileID: 654031127}
   - component: {fileID: 654031126}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tilemap Fg2
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -20302,6 +20302,7 @@ MonoBehaviour:
   dashTime: 0.35
   dashSpeed: 10
   playerMidairSpeed: 0.5
+  fallVelocityLimit: -10
   playerSpriteRenderer: {fileID: 1461837933}
   barrierCollider: {fileID: 1366475577}
   teleportBreakTime: 1
@@ -55298,7 +55299,7 @@ GameObject:
   - component: {fileID: 1734710149}
   - component: {fileID: 1734710151}
   - component: {fileID: 1734710150}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: Foot
   m_TagString: Player
   m_Icon: {fileID: 0}

@@ -1,5 +1,6 @@
 using UnityEngine;
 using NaughtyAttributes;
+using UnityEditor;
 
 [RequireComponent(typeof(BoxCollider2D))]
 public class CameraTriggerController : MonoBehaviour
@@ -19,5 +20,11 @@ public class CameraTriggerController : MonoBehaviour
     public void SetCameraPosition()
     {
         cameraPosData.cameraPos = Camera.main.transform.position;
+        
+        EditorUtility.SetDirty(this);
+        EditorUtility.SetDirty(cameraPosData);
+        PrefabUtility.RecordPrefabInstancePropertyModifications(this); // IDK if it is needed
+        AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
     }
 }
