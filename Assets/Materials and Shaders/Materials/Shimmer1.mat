@@ -70,14 +70,14 @@ Material:
     - _Metallic: 0
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _ScrollScale: 5
-    - _ScrollSpeed: 0.4
-    - _Smoothness: 0.5
-    - _Transparency: 1
+    - _ScrollScale: 3.57
+    - _ScrollSpeed: 0.36
+    - _Smoothness: -0.56
+    - _Transparency: 1.33
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
-    - _RemapValues: {r: 0.2, g: 0.9, b: 0, a: 0}
+    - _RemapValues: {r: 0.36, g: 0.9, b: 0, a: 0}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
-    - _TintColor: {r: 0, g: 0.006657771, b: 0.26415092, a: 1}
+    - _TintColor: {r: 0.098967604, g: 0.10056686, b: 0.1509434, a: 1}
   m_BuildTextureStacks: []
