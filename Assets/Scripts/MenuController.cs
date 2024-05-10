@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.Rendering;
@@ -22,17 +24,15 @@ public class MenuController : MonoBehaviour
 
     public AudioMixer masterMixer;
 
-    static int[] option1 = new int[2] { 800, 600 };
-    static int[] option2 = new int[2] { 1024, 768 };
-    static int[] option3 = new int[2] { 1920, 1080};
-
-    int[][] resolutions = new int[][] { option1, option2, option3 };
+    Resolution[] resolutions;
 
     // Start is called before the first frame update
     void Start()
     {
-        w = resolutions[2][0];
-        h = resolutions[2][1];
+        resolutions = Screen.resolutions;
+
+        w = resolutions[resolutions.Count() -1].width;
+        h = resolutions[resolutions.Count() -1].height;
 
         Screen.SetResolution(w, h, full);
 
@@ -40,6 +40,24 @@ public class MenuController : MonoBehaviour
         setCanvasHome();
 
         masterMixer.SetFloat("MasterVolume", 0f);
+
+        // Create a list to store resolution strings
+        List<string> options = new List<string>();
+
+        foreach (var res in resolutions)
+        {
+
+            if (res.width >= 640)
+            {
+                string option = res.width + " x " + res.height;
+
+                Debug.Log(option);
+
+                if(!options.Contains(option)) options.Add(option);
+            }
+        }
+
+        resolutionDropdown.AddOptions(options);
     }
 
     public void startGame()
@@ -85,8 +103,8 @@ public class MenuController : MonoBehaviour
     {
         myaudio.Play();
 
-        w = resolutions[resolutionDropdown.value][0];
-        h = resolutions[resolutionDropdown.value][1];
+        w = resolutions[resolutionDropdown.value].width;
+        h = resolutions[resolutionDropdown.value].height;
 
         Screen.SetResolution(w, h, full);
         Debug.Log(resolutionDropdown.value + " " + w + " " + h);
@@ -95,9 +113,9 @@ public class MenuController : MonoBehaviour
     public void sliderChange()
     {
 
-        float vol = 20f;
+        float vol = 40f;
 
-        vol = slider.value > 0.1f ? vol * slider.value - 20f : -80f;
+        vol = slider.value > 0.1f ? vol * slider.value - 40f : -80f;
 
         Debug.Log("Slider: " + slider.value + "Volume: " + vol);
 
