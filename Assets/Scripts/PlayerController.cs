@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float dashSpeed = 10f;
     [SerializeField] private float playerMidairSpeed = 0.5f;
     [SerializeField] private float fallVelocityLimit = -10f;
+    [SerializeField] private float teleportOffsetDistance = 0.8f;
     [SerializeField] private SpriteRenderer playerSpriteRenderer;
     [SerializeField] private BoxCollider2D barrierCollider;
 
@@ -32,6 +33,7 @@ public class PlayerController : MonoBehaviour
     private bool isDashing = false;
 
     private Vector2 dashDirection;
+    private float currentKunaiAngle;
     private float horizontal => Input.GetAxis("Horizontal");
     private float vertical => Input.GetAxis("Vertical");
 
@@ -304,19 +306,20 @@ public class PlayerController : MonoBehaviour
 
     private void Teleport()
     {
-        if(spawnedKunai == null) return;
-
+        if (spawnedKunai == null) return;
 
         this.GetComponentInChildren<TelleportEffects>().Spawn();
 
-        rb.transform.position = spawnedKunai.transform.position;
+        // Calculate the offset
+         // Adjust this value as needed
+        Vector3 offset = new Vector3(Mathf.Cos(currentKunaiAngle * Mathf.Deg2Rad), Mathf.Sin(currentKunaiAngle * Mathf.Deg2Rad), 0) * -teleportOffsetDistance;
+
+        // Teleport to the current kunai position with an offset based on the currentKunaiAngle
+        rb.transform.position = spawnedKunai.transform.position + offset;
         rb.velocity = Vector2.zero;
 
         RemoveSpawnedKunai();
         ActivateBreakTimeWithTime(teleportBreakTime, true);
-
-        //RemoveSpawnedKama();
-
     }
 
     public void EnableDash()
@@ -334,7 +337,7 @@ public class PlayerController : MonoBehaviour
 
     private void ShootKunai()
     {
-        if(!hasKunai) return;
+        if (!hasKunai) return;
 
         ActivateBreakTime();
         hasKunai = false;
@@ -342,11 +345,11 @@ public class PlayerController : MonoBehaviour
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 direction = (mousePos - kunaiOrigin.position).normalized;
 
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        currentKunaiAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-        spawnedKunai = Instantiate(kunaiPrefab, kunaiOrigin.position, Quaternion.Euler(0, 0, angle));
+        spawnedKunai = Instantiate(kunaiPrefab, kunaiOrigin.position, Quaternion.Euler(0, 0, currentKunaiAngle));
 
-        Debug.Log("ANGULO " + angle);
+        Debug.Log("ANGULO " + currentKunaiAngle);
 
         kunaiOrigin.gameObject.SetActive(false);
     }

@@ -20976,6 +20976,7 @@ MonoBehaviour:
   dashSpeed: 10
   playerMidairSpeed: 0.5
   fallVelocityLimit: -10
+  teleportOffsetDistance: 0.8
   playerSpriteRenderer: {fileID: 1461837933}
   barrierCollider: {fileID: 1366475577}
   teleportBreakTime: 1

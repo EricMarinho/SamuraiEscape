@@ -63,7 +63,7 @@ public class MenuController : MonoBehaviour
     public void startGame()
     {
         Debug.Log("START");
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("PlayTest");
     }
     
     public void setCanvasHome()
