@@ -13,13 +13,17 @@ public class InGameUIManager : MonoBehaviour
     [SerializeField] private Button returnToMenuButton;
 
     [Header("Audio")]
-    [SerializeField] private Toggle toggleMuteButon;
+    [SerializeField] private Toggle toggleMuteButton;
     [SerializeField] private Text toggleLabel;
 
     [Header("Tutorial")]
     [SerializeField] private GameObject tutorialPopup;
     [SerializeField] private Text tutorialPopUpText;
     [SerializeField] private Button closeTutorialButton;
+
+    [Header("End Game")]
+    [SerializeField] private GameObject endGameScreen;
+    [SerializeField] private Button endGameReturnToMenuButton;
 
     private void Start()
     {
@@ -38,7 +42,7 @@ public class InGameUIManager : MonoBehaviour
             Time.timeScale = 1;
             SceneManager.LoadScene("HomeScreen");
         });
-        toggleMuteButon.onValueChanged.AddListener((value) =>
+        toggleMuteButton.onValueChanged.AddListener((value) =>
         {
             if (value)
             {
@@ -65,6 +69,37 @@ public class InGameUIManager : MonoBehaviour
             tutorialPopup.SetActive(false);
             closeTutorialButton.gameObject.SetActive(false);
         });
+        GameEvents.Instance.OnEndGame += () =>
+        {
+            endGameScreen.SetActive(true);
+        };
+        endGameReturnToMenuButton.onClick.AddListener(() =>
+        {
+            endGameScreen.SetActive(false);
+            SceneManager.LoadScene("HomeScreen");
+        });
+    }
+
+    private void OnDestroy()
+    {
+        openReturnToMenuButtonPopup.onClick.RemoveAllListeners();
+        closeReturnToMenuButtonPopup.onClick.RemoveAllListeners();
+        returnToMenuButton.onClick.RemoveAllListeners();
+        toggleMuteButton.onValueChanged.RemoveAllListeners();
+        closeTutorialButton.onClick.RemoveAllListeners();
+        endGameReturnToMenuButton.onClick.RemoveAllListeners();
+
+        GameEvents.Instance.OnTutorialTriggerEntered -= (message) =>
+        {
+            tutorialPopUpText.text = message;
+            tutorialPopup.SetActive(true);
+            closeTutorialButton.gameObject.SetActive(true);
+            Time.timeScale = 0;
+        };
+        GameEvents.Instance.OnEndGame -= () =>
+        {
+            endGameScreen.SetActive(true);
+        };
     }
 
     public void CloseReturnToMenuPopup()

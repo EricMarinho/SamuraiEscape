@@ -83,11 +83,13 @@ public class PlayerController : MonoBehaviour
         playerSprite = GetComponent<SpriteRenderer>();
 
         eventSys = GameObject.Find("EventSystem").GetComponent<EventSystem>();
+        GameEvents.Instance.OnEndGame += () => this.enabled = false;
     }
 
     private void OnDestroy()
     {
         GameEvents.Instance.OnCrystalCollected -= OnCrystalCollected;
+        GameEvents.Instance.OnEndGame -= () => this.enabled = false;
     }
 
     private void FixedUpdate()

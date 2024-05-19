@@ -26,6 +26,8 @@ public class MenuController : MonoBehaviour
 
     Resolution[] resolutions;
 
+    [SerializeField] private GameObject transitionScreen;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -58,12 +60,14 @@ public class MenuController : MonoBehaviour
         }
 
         resolutionDropdown.AddOptions(options);
+        transitionScreen.SetActive(false);
     }
 
     public void startGame()
     {
         Debug.Log("START");
         home.gameObject.SetActive(false);
+        transitionScreen.SetActive(true);
         SceneManager.LoadScene("PlayTest");
     }
     

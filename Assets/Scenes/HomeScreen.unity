@@ -635,6 +635,7 @@ MonoBehaviour:
   myaudio: {fileID: 688670912}
   bgm: {fileID: 125423779}
   masterMixer: {fileID: 24100000, guid: b3be5660ae4c21e44bf65b44fef305f0, type: 2}
+  transitionScreen: {fileID: 2052046542}
 --- !u!4 &208982880
 Transform:
   m_ObjectHideFlags: 0
@@ -5429,7 +5430,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2052046543
 RectTransform:
   m_ObjectHideFlags: 0
