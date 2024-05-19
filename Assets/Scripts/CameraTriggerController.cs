@@ -1,6 +1,8 @@
 using UnityEngine;
 using NaughtyAttributes;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 [RequireComponent(typeof(BoxCollider2D))]
 public class CameraTriggerController : MonoBehaviour
@@ -16,6 +18,7 @@ public class CameraTriggerController : MonoBehaviour
         }
     }
 
+#if UNITY_EDITOR
     [Button("Set Camera Position")]
     public void SetCameraPosition()
     {
@@ -27,4 +30,5 @@ public class CameraTriggerController : MonoBehaviour
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
     }
+#endif
 }

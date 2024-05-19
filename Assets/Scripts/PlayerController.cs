@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour
 {
@@ -45,6 +46,8 @@ public class PlayerController : MonoBehaviour
     private float dashTimer = 0f;
     private float currentPlayerSpeed;
 
+    private EventSystem eventSys;
+
     //[SerializeField] private float kamaBreakTime = 1f;
     //[SerializeField] private float kamaTeleportSpeed = 0.1f;
     //[SerializeField] private Transform kamaOrigin;
@@ -78,6 +81,8 @@ public class PlayerController : MonoBehaviour
 
         playerAnimation = GetComponent<Animator>();
         playerSprite = GetComponent<SpriteRenderer>();
+
+        eventSys = GameObject.Find("EventSystem").GetComponent<EventSystem>();
     }
 
     private void OnDestroy()
@@ -110,8 +115,13 @@ public class PlayerController : MonoBehaviour
         //    return;
         //}
 
+
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
+            if (eventSys.IsPointerOverGameObject())
+            {
+                return;
+            }
             if (hasDash)
             {
                 TryDash();

@@ -63,6 +63,7 @@ public class MenuController : MonoBehaviour
     public void startGame()
     {
         Debug.Log("START");
+        home.gameObject.SetActive(false);
         SceneManager.LoadScene("PlayTest");
     }
     
