@@ -36,7 +36,7 @@ public class FootHandler : MonoBehaviour
             playerAnimation.SetBool("Jumping", PlayerController.instance.isJumping);
         }
     }
-
+           
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Wood Ground"))
