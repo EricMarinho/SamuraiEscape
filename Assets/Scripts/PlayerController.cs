@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer playerSprite;
 
     public bool isJumping = false;
+    public bool kunaiThrown = false;
 
     public bool hasKunai = true;
     public bool hasDash = false;
@@ -194,6 +195,10 @@ public class PlayerController : MonoBehaviour
         }
 
         //Debug.Log(horizontal);
+
+
+        if (kunaiThrown) kunaiThrown = false;
+        playerAnimation.SetBool("Kunai", kunaiThrown);
     }
 
     private void RestartScene()
@@ -364,7 +369,9 @@ public class PlayerController : MonoBehaviour
         Debug.Log("ANGULO " + currentKunaiAngle);
 
         kunaiOrigin.gameObject.SetActive(false);
-        playerAnimation.SetBool("Kunai", true);
+
+        kunaiThrown = true;
+        playerAnimation.SetBool("Kunai", kunaiThrown);
     }
 
     public void RemoveSpawnedKunai()
