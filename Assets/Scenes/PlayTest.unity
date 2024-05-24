@@ -20704,7 +20704,7 @@ Animator:
   m_GameObject: {fileID: 1461837928}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 4b590ab01a371fc45bb098e20225e7b8, type: 2}
+  m_Controller: {fileID: 9100000, guid: 0729745cb9d526e4aa48c02b49495a4a, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -20741,6 +20741,7 @@ MonoBehaviour:
   kunaiPrefab: {fileID: 4599086513711698186, guid: 05ec7812172c2da4dadb18945f864534, type: 3}
   crystalBreakTime: 1
   isJumping: 0
+  kunaiThrown: 0
   hasKunai: 1
   hasDash: 0
 --- !u!50 &1461837931
@@ -20901,7 +20902,7 @@ MonoBehaviour:
   throwForce: 5
   destroyTime: 2
   trunk: {fileID: 3591147792009552838, guid: 26f23a2a21194fb449074a20d5491a1c, type: 3}
-  fumacaBrilho: {fileID: 4050341837164165447, guid: a33b40527b1e9984899de06152f73e5a, type: 3}
+  fumacaBrilho: {fileID: 4747276661642362180, guid: 3901d1d252bc7b24fbddc85601198d1d, type: 3}
 --- !u!1 &1543008335 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8203186460972588203, guid: 520bf23522cf9964ab3062eccfb613b7, type: 3}
@@ -57879,6 +57880,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4072912051502013584, guid: ca735258fda83524d98a6b256fe98d88, type: 3}
   m_PrefabInstance: {fileID: 2105267864}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8092720809468781313
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3712054672459982612, guid: 3901d1d252bc7b24fbddc85601198d1d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 16.700754
+      objectReference: {fileID: 0}
+    - target: {fileID: 3712054672459982612, guid: 3901d1d252bc7b24fbddc85601198d1d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -7.9691267
+      objectReference: {fileID: 0}
+    - target: {fileID: 3712054672459982612, guid: 3901d1d252bc7b24fbddc85601198d1d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3712054672459982612, guid: 3901d1d252bc7b24fbddc85601198d1d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3712054672459982612, guid: 3901d1d252bc7b24fbddc85601198d1d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3712054672459982612, guid: 3901d1d252bc7b24fbddc85601198d1d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3712054672459982612, guid: 3901d1d252bc7b24fbddc85601198d1d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3712054672459982612, guid: 3901d1d252bc7b24fbddc85601198d1d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3712054672459982612, guid: 3901d1d252bc7b24fbddc85601198d1d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3712054672459982612, guid: 3901d1d252bc7b24fbddc85601198d1d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4747276661642362180, guid: 3901d1d252bc7b24fbddc85601198d1d, type: 3}
+      propertyPath: m_Name
+      value: "Fuma\xE7a+Brilho1000_0"
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3901d1d252bc7b24fbddc85601198d1d, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -57897,3 +57955,4 @@ SceneRoots:
   - {fileID: 1341732121}
   - {fileID: 1749997998}
   - {fileID: 1367426619}
+  - {fileID: 8092720809468781313}
