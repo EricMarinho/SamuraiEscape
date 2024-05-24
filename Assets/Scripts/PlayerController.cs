@@ -364,6 +364,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log("ANGULO " + currentKunaiAngle);
 
         kunaiOrigin.gameObject.SetActive(false);
+        playerAnimation.SetBool("Kunai", true);
     }
 
     public void RemoveSpawnedKunai()
