@@ -123,7 +123,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 16, y: 16}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 16, y: 16}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -144,7 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c74348737a5dc9648a410728c53acd9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kunaiSpeed: 22
+  kunaiSpeed: 18
   kunaiRadius: 0.2
   kunaiDetectingDistance: 0.05
 --- !u!50 &-8027269814935091673
