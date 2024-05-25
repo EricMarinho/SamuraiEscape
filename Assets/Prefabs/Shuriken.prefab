@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7857013395089523970}
   - component: {fileID: -8027269814935091673}
   m_Layer: 6
-  m_Name: Kunai
+  m_Name: Shuriken
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
