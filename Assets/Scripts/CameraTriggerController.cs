@@ -15,15 +15,13 @@ public class CameraTriggerController : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             NewCameraController.instance.SetCameraPosition(cameraPosData.cameraPos);
+            Debug.Log("Camera Position Set to" + cameraPosData.cameraPos);
 
             if (isTeleportCameraTrigger)
             {
-                PlayerController.instance.rb.velocity = Vector2.zero;
-                PlayerController.instance.rb.position = cameraPosData.playerTeleportPosition;
+                PlayerController.instance.SetPlayerPosition(cameraPosData.playerTeleportPosition);
                 Debug.Log("Player Position Set to" + cameraPosData.playerTeleportPosition);
             }
-
-            Debug.Log("Camera Position Set to" + cameraPosData.cameraPos);
         }
     }
 

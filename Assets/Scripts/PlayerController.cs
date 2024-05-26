@@ -402,6 +402,11 @@ public class PlayerController : MonoBehaviour
         DisableDashCollider();
     }
 
+    public void SetPlayerPosition(Vector3 position)
+    {
+        transform.position = position;
+    }
+
     //private void ThrowKama()
     //{
     //    if (!hasKama) return;
