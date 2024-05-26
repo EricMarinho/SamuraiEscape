@@ -2641,6 +2641,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraPosData: {fileID: 11400000, guid: 2c1f3ef80f60e1d4c843fb2f23274a84, type: 2}
+  isTeleportCameraTrigger: 0
 --- !u!61 &480399527
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -18835,6 +18836,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraPosData: {fileID: 11400000, guid: 94c313b1c259da743a1319605b5f3c02, type: 2}
+  isTeleportCameraTrigger: 0
 --- !u!61 &686474639
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -19567,6 +19569,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraPosData: {fileID: 11400000, guid: 03f57007d2e5ab04a9a996019074fbd1, type: 2}
+  isTeleportCameraTrigger: 0
 --- !u!61 &919092229
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -19823,6 +19826,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraPosData: {fileID: 11400000, guid: 201d55f10ed250e4aba4982a10c80ebe, type: 2}
+  isTeleportCameraTrigger: 0
 --- !u!61 &1023614006
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -20119,6 +20123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraPosData: {fileID: 11400000, guid: da87cac7cb3f9564d8ebbc01cc4e1ab6, type: 2}
+  isTeleportCameraTrigger: 0
 --- !u!61 &1098055837
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -21153,6 +21158,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraPosData: {fileID: 11400000, guid: 253f45fd940b9ec47a9c5bddf8cb3e09, type: 2}
+  isTeleportCameraTrigger: 0
 --- !u!61 &1367426618
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -21494,6 +21500,7 @@ MonoBehaviour:
   kunaiThrown: 0
   hasKunai: 1
   hasDash: 0
+  rb: {fileID: 0}
 --- !u!50 &1461837931
 Rigidbody2D:
   serializedVersion: 4
@@ -22692,6 +22699,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraPosData: {fileID: 11400000, guid: 8e42ba11f129b324cbeab6da2da4d759, type: 2}
+  isTeleportCameraTrigger: 1
 --- !u!61 &1690043702
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -57786,6 +57794,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraPosData: {fileID: 11400000, guid: da87cac7cb3f9564d8ebbc01cc4e1ab6, type: 2}
+  isTeleportCameraTrigger: 0
 --- !u!61 &1745724519
 BoxCollider2D:
   m_ObjectHideFlags: 0

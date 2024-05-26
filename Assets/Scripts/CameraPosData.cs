@@ -4,4 +4,5 @@ using UnityEngine;
 public class CameraPosData : ScriptableObject
 {
     public Vector3 cameraPos;
+    public Vector3 playerTeleportPosition;
 }

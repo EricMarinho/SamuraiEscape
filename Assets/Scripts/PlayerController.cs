@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
     private float horizontal => Input.GetAxis("Horizontal");
     private float vertical => Input.GetAxis("Vertical");
 
-    private Rigidbody2D rb;
+    public Rigidbody2D rb;
 
     private GameObject spawnedKunai = null;
 

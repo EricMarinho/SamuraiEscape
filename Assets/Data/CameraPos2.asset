@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: CameraPos2
   m_EditorClassIdentifier: 
   cameraPos: {x: 27, y: 30, z: -10}
+  playerTeleportPosition: {x: 21.42, y: 19, z: 0}

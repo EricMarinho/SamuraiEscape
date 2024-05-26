@@ -8,12 +8,21 @@ using UnityEditor;
 public class CameraTriggerController : MonoBehaviour
 {
     [SerializeField] private CameraPosData cameraPosData;
+    [SerializeField] private bool isTeleportCameraTrigger = false;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
             NewCameraController.instance.SetCameraPosition(cameraPosData.cameraPos);
+
+            if (isTeleportCameraTrigger)
+            {
+                PlayerController.instance.rb.velocity = Vector2.zero;
+                PlayerController.instance.rb.position = cameraPosData.playerTeleportPosition;
+                Debug.Log("Player Position Set to" + cameraPosData.playerTeleportPosition);
+            }
+
             Debug.Log("Camera Position Set to" + cameraPosData.cameraPos);
         }
     }
@@ -23,6 +32,7 @@ public class CameraTriggerController : MonoBehaviour
     public void SetCameraPosition()
     {
         cameraPosData.cameraPos = Camera.main.transform.position;
+        cameraPosData.playerTeleportPosition = PlayerController.instance.rb.position;
         
         EditorUtility.SetDirty(this);
         EditorUtility.SetDirty(cameraPosData);

@@ -11,9 +11,9 @@ public class CrystalController : MonoBehaviour
     {
         GameEvents.Instance.OnCrystalRestored += OnCrystalRestored;
 
-        crystalShine = GameObject.Find("Shine");
-        crystalShine = Instantiate(crystalShine, transform.position, Quaternion.identity, crystalShine.transform);
-        crystalShine.transform.position = transform.position;
+        //crystalShine = GameObject.Find("Shine");
+        //crystalShine = Instantiate(crystalShine, transform.position, Quaternion.identity, crystalShine.transform);
+        //crystalShine.transform.position = transform.position;
     }
     
     private void OnDestroy()
@@ -24,7 +24,6 @@ public class CrystalController : MonoBehaviour
     private void OnCrystalRestored()
     {
         gameObject.SetActive(true);
-        crystalShine.GetComponent<Animator>().SetBool("Collected", false);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -33,7 +32,6 @@ public class CrystalController : MonoBehaviour
         {
             GameEvents.Instance.OnCrystalCollected?.Invoke();
             gameObject.SetActive(false);
-            crystalShine.GetComponent<Animator>().SetBool("Collected", true);
         }
     }
 }
