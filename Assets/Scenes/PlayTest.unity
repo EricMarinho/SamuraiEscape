@@ -3239,7 +3239,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &553177765
 Transform:
   m_ObjectHideFlags: 0
@@ -20518,25 +20518,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 449508539603292841, guid: fd783a011e05c7a46a8ab9f9b8818631, type: 3}
-      propertyPath: m_IsActive
+    - target: {fileID: 416119484758775189, guid: fd783a011e05c7a46a8ab9f9b8818631, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 416119484758775189, guid: fd783a011e05c7a46a8ab9f9b8818631, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 416119484758775189, guid: fd783a011e05c7a46a8ab9f9b8818631, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 416119484758775189, guid: fd783a011e05c7a46a8ab9f9b8818631, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 416119484758775189, guid: fd783a011e05c7a46a8ab9f9b8818631, type: 3}
+      propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 732456569586383594, guid: fd783a011e05c7a46a8ab9f9b8818631, type: 3}
-      propertyPath: m_FontData.m_FontSize
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1858579880800439889, guid: fd783a011e05c7a46a8ab9f9b8818631, type: 3}
-      propertyPath: m_Text
-      value: "Voc\xEA Fugiu da Pris\xE3o, Obrigado por Jogar!\n\nAperte R para rejogar."
-      objectReference: {fileID: 0}
-    - target: {fileID: 1858579880800439889, guid: fd783a011e05c7a46a8ab9f9b8818631, type: 3}
-      propertyPath: m_FontData.m_MinSize
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1858579880800439889, guid: fd783a011e05c7a46a8ab9f9b8818631, type: 3}
-      propertyPath: m_FontData.m_FontSize
-      value: 18
+    - target: {fileID: 416119484758775189, guid: fd783a011e05c7a46a8ab9f9b8818631, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -50
       objectReference: {fileID: 0}
     - target: {fileID: 2228790648494012004, guid: fd783a011e05c7a46a8ab9f9b8818631, type: 3}
       propertyPath: m_Pivot.x
@@ -20621,38 +20625,6 @@ PrefabInstance:
     - target: {fileID: 3006633841725387661, guid: fd783a011e05c7a46a8ab9f9b8818631, type: 3}
       propertyPath: m_Name
       value: InGameUICanvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 3077277098753867617, guid: fd783a011e05c7a46a8ab9f9b8818631, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 35.30127
-      objectReference: {fileID: 0}
-    - target: {fileID: 3077277098753867617, guid: fd783a011e05c7a46a8ab9f9b8818631, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -13.519043
-      objectReference: {fileID: 0}
-    - target: {fileID: 3243282273665101757, guid: fd783a011e05c7a46a8ab9f9b8818631, type: 3}
-      propertyPath: m_Text
-      value: Silenciar
-      objectReference: {fileID: 0}
-    - target: {fileID: 3243282273665101757, guid: fd783a011e05c7a46a8ab9f9b8818631, type: 3}
-      propertyPath: m_FontData.m_FontSize
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3505188890984531787, guid: fd783a011e05c7a46a8ab9f9b8818631, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3507648978976919420, guid: fd783a011e05c7a46a8ab9f9b8818631, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 35.30078
-      objectReference: {fileID: 0}
-    - target: {fileID: 3507648978976919420, guid: fd783a011e05c7a46a8ab9f9b8818631, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -40.557617
-      objectReference: {fileID: 0}
-    - target: {fileID: 5235371914039766261, guid: fd783a011e05c7a46a8ab9f9b8818631, type: 3}
-      propertyPath: m_Text
-      value: Voltar ao Menu
       objectReference: {fileID: 0}
     - target: {fileID: 7932469605622624406, guid: fd783a011e05c7a46a8ab9f9b8818631, type: 3}
       propertyPath: m_AnchorMax.x

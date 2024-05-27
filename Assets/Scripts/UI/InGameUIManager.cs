@@ -25,6 +25,9 @@ public class InGameUIManager : MonoBehaviour
     [SerializeField] private GameObject endGameScreen;
     [SerializeField] private Button endGameReturnToMenuButton;
 
+    [Header("KunaiIndicator")]
+    [SerializeField] private Image kunaiIndicator;
+
     private void Start()
     {
         openReturnToMenuButtonPopup.onClick.AddListener(() =>
@@ -81,6 +84,14 @@ public class InGameUIManager : MonoBehaviour
             endGameScreen.SetActive(false);
             SceneManager.LoadScene("HomeScreen");
         });
+        GameEvents.Instance.OnKunaiDisable += () =>
+        {
+            kunaiIndicator.color = new Color(kunaiIndicator.color.r, kunaiIndicator.color.g, kunaiIndicator.color.b, 0.3f);
+        };
+        GameEvents.Instance.OnKunaiRecovered += () =>
+        {
+            kunaiIndicator.color = new Color(kunaiIndicator.color.r, kunaiIndicator.color.g, kunaiIndicator.color.b, 1f);
+        };
     }
 
     private void OnDestroy()

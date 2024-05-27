@@ -11,6 +11,8 @@ public class GameEvents : MonoBehaviour
     public Action OnCrystalCollected;
     public Action OnCrystalRestored;
     public Action OnEndGame;
+    public Action OnKunaiDisable;
+    public Action OnKunaiRecovered;
     public Action<string> OnTutorialTriggerEntered;
 
     private void Awake()

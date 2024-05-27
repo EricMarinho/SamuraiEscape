@@ -379,6 +379,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!hasKunai) return;
 
+        GameEvents.Instance.OnKunaiDisable?.Invoke();
         ActivateBreakTime();
         hasKunai = false;
 
@@ -408,6 +409,7 @@ public class PlayerController : MonoBehaviour
     public void RecoverKunai()
     {
         hasKunai = true;
+        GameEvents.Instance.OnKunaiRecovered?.Invoke();
         kunaiOrigin.gameObject.SetActive(true);
     }
 
