@@ -136,8 +136,11 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
-            if(!isJumping)
+            if (!isJumping)
+            {
                 OnCrystalCollected();
+                DeactivateBreakTime();
+            }
         }
 
         if (isDashing)
