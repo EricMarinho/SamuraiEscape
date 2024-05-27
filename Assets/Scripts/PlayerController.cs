@@ -167,6 +167,7 @@ public class PlayerController : MonoBehaviour
         // Check if the player is currently jumping
         if (isJumping)
         {
+            AudioManager.instance.StopWalkingSound();
             // Calculate the horizontal velocity change based on mid-air speed
             Vector2 midairVelocityChange = new Vector2(horizontal * playerMidairSpeed, 0);
             rb.velocity += midairVelocityChange;
@@ -174,11 +175,21 @@ public class PlayerController : MonoBehaviour
             // Limit the horizontal velocity to currentPlayerSpeed
             float clampedVelocityX = Mathf.Clamp(rb.velocity.x, -currentPlayerSpeed, currentPlayerSpeed);
             rb.velocity = new Vector2(clampedVelocityX, rb.velocity.y);
+
         }
         else
         {
             // Player is on the ground, move horizontally at currentPlayerSpeed
             rb.velocity = new Vector2(horizontal * currentPlayerSpeed, rb.velocity.y);
+            
+            if (horizontal != 0f)
+            {
+                AudioManager.instance.PlayWalkingSound();
+            }
+            else
+            {
+                AudioManager.instance.StopWalkingSound();
+            }
         }
 
         // Update the animator parameter for movement
@@ -234,6 +245,7 @@ public class PlayerController : MonoBehaviour
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
 
         playerAnimation.SetBool("Jumping", isJumping);
+        AudioManager.instance.PlayJumpSound();
     }
 
     private void EnableDashCollider()
@@ -251,6 +263,7 @@ public class PlayerController : MonoBehaviour
         rb.velocity = Vector2.zero;
         rb.gravityScale = 0f;
         isDashing = true;
+        AudioManager.instance.PlayDashSound();
         EnableDashCollider();
 
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -326,6 +339,7 @@ public class PlayerController : MonoBehaviour
         if (spawnedKunai == null) return;
 
         this.GetComponentInChildren<TelleportEffects>().Spawn();
+        AudioManager.instance.PlayTeleportSound();
 
         // Calculate the offset
          // Adjust this value as needed
@@ -372,6 +386,7 @@ public class PlayerController : MonoBehaviour
 
         kunaiThrown = true;
         playerAnimation.SetBool("Kunai", kunaiThrown);
+        AudioManager.instance.PlayShootKunaiSound();
 
     }
 

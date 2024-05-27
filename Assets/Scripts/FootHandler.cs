@@ -22,6 +22,7 @@ public class FootHandler : MonoBehaviour
             PlayerController.instance.RemoveSpawnedKunai();
             PlayerController.instance.DisableDash();
             GameEvents.Instance.OnCrystalRestored?.Invoke();
+            AudioManager.instance.PlayReachGroundSound();
 
             if (PlayerController.instance.isJumping) return;
             PlayerController.instance.RecoverKunai();

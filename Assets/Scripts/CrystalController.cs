@@ -32,6 +32,7 @@ public class CrystalController : MonoBehaviour
         {
             GameEvents.Instance.OnCrystalCollected?.Invoke();
             gameObject.SetActive(false);
+            AudioManager.instance.PlayCollectCrystalSound();
         }
     }
 }

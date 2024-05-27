@@ -46,13 +46,13 @@ public class InGameUIManager : MonoBehaviour
         {
             if (value)
             {
-                AudioManager.instance.audioSource.volume = PlayerPrefs.GetInt("Volume", 1);
+                AudioManager.instance.UnmuteSounds();
                 toggleLabel.text = "Mute";
                 
             }
             else
             {
-                AudioManager.instance.audioSource.volume = 0;
+                AudioManager.instance.MuteSounds();
                 toggleLabel.text = "Unmute";
             }
         });
