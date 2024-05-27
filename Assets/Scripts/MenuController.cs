@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.Rendering;
@@ -11,12 +12,12 @@ public class MenuController : MonoBehaviour
     public Canvas home;
     public Canvas options;
     public Canvas credits;
-    public Dropdown resolutionDropdown;
+    public Dropdown resolutionDropDown;
     public Slider slider;
     public Toggle fullScreenToggler;
     public Toggle screenSizeToggler;
-
-    int h, w;
+    private FullScreenMode fullScreenMode;
+    //int h, w;
     bool full = true;
 
     public AudioSource myaudio;
@@ -29,39 +30,65 @@ public class MenuController : MonoBehaviour
     [SerializeField] private GameObject transitionScreen;
 
     // Start is called before the first frame update
-    void Start()
+    //void Start()
+    //{
+    //    resolutions = Screen.resolutions;
+
+    //    w = resolutions[resolutions.Count() -1].width;
+    //    h = resolutions[resolutions.Count() -1].height;
+
+    //    Screen.SetResolution(w, h, full);
+
+    //    bgm.Play();
+    //    setCanvasHome();
+
+    //    masterMixer.SetFloat("MasterVolume", 0f);
+
+    //    // Create a list to store resolution strings
+    //    List<string> options = new List<string>();
+
+    //    foreach (var res in resolutions)
+    //    {
+
+    //        if (res.width >= 640)
+    //        {
+    //            string option = res.width + " x " + res.height;
+
+    //            Debug.Log(option);
+
+    //            if(!options.Contains(option)) options.Add(option);
+    //        }
+    //    }
+
+    //    resolutionDropdown.AddOptions(options);
+    //    transitionScreen.SetActive(false);
+    //}
+
+    private void Start()
     {
+
+        fullScreenMode = FullScreenMode.ExclusiveFullScreen; 
+
         resolutions = Screen.resolutions;
-
-        w = resolutions[resolutions.Count() -1].width;
-        h = resolutions[resolutions.Count() -1].height;
-
-        Screen.SetResolution(w, h, full);
-
-        bgm.Play();
-        setCanvasHome();
-
-        masterMixer.SetFloat("MasterVolume", 0f);
-
-        // Create a list to store resolution strings
+        resolutionDropDown.ClearOptions();
         List<string> options = new List<string>();
-
-        foreach (var res in resolutions)
+        int currentResolutionIndex = 0;
+        for (int i = 0; i < resolutions.Length; i++)
         {
+            string option = resolutions[i].width + " x " + resolutions[i].height + " " + (int)resolutions[i].refreshRateRatio.value + "Hz";
+            options.Add(option);
 
-            if (res.width >= 640)
+            if (resolutions[i].width == Screen.currentResolution.width &&
+                resolutions[i].height == Screen.currentResolution.height)
             {
-                string option = res.width + " x " + res.height;
-
-                Debug.Log(option);
-
-                if(!options.Contains(option)) options.Add(option);
+                currentResolutionIndex = i;
             }
         }
-
-        resolutionDropdown.AddOptions(options);
-        transitionScreen.SetActive(false);
+        resolutionDropDown.AddOptions(options);
+        resolutionDropDown.value = currentResolutionIndex;
+        resolutionDropDown.RefreshShownValue();
     }
+
 
     public void startGame()
     {
@@ -70,7 +97,7 @@ public class MenuController : MonoBehaviour
         transitionScreen.SetActive(true);
         SceneManager.LoadScene("PlayTest");
     }
-    
+
     public void setCanvasHome()
     {
         myaudio.Play();
@@ -104,27 +131,27 @@ public class MenuController : MonoBehaviour
         Application.Quit();
     }
 
-    public void resolutionChange()
+    //public void resolutionChange()
+    //{
+    //    myaudio.Play();
+
+    //    w = resolutions[resolutionDropdown.value].width;
+    //    h = resolutions[resolutionDropdown.value].height;
+
+    //    Screen.SetResolution(w, h, full);
+    //    Debug.Log(resolutionDropdown.value + " " + w + " " + h);
+    //}
+
+    public void setResolution(int resolutionIndex)
     {
-        myaudio.Play();
-
-        w = resolutions[resolutionDropdown.value].width;
-        h = resolutions[resolutionDropdown.value].height;
-
-        Screen.SetResolution(w, h, full);
-        Debug.Log(resolutionDropdown.value + " " + w + " " + h);
+        Resolution resolution = resolutions[resolutionIndex];
+        Screen.SetResolution(resolution.width, resolution.height, fullScreenMode, resolution.refreshRateRatio);
     }
 
     public void sliderChange()
     {
-
-        float vol = 40f;
-
-        vol = slider.value > 0.1f ? vol * slider.value - 40f : -80f;
-
-        Debug.Log("Slider: " + slider.value + "Volume: " + vol);
-
-        masterMixer.SetFloat("MasterVolume", vol);
+        Debug.Log("Volume " + slider.value + " Final " + Mathf.Log10(slider.value * 20));
+        masterMixer.SetFloat("MasterVolume", Mathf.Log10(slider.value * 20));
     }
 
     public void fullscreenToggle()
@@ -132,14 +159,11 @@ public class MenuController : MonoBehaviour
         myaudio.Play();
         Debug.Log(fullScreenToggler.isOn);
 
+        if (full) fullScreenMode = FullScreenMode.FullScreenWindow;
+        else fullScreenMode = FullScreenMode.ExclusiveFullScreen;
+
         full = !full;
-        Screen.SetResolution(w,h, full);
+        //Screen.SetResolution(w, h, full);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
- }
+}
