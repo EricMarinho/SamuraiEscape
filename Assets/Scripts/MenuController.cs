@@ -27,6 +27,8 @@ public class MenuController : MonoBehaviour
 
     Resolution[] resolutions;
 
+    int resolutionIdx;
+
     [SerializeField] private GameObject transitionScreen;
 
     // Start is called before the first frame update
@@ -86,6 +88,10 @@ public class MenuController : MonoBehaviour
         }
         resolutionDropDown.AddOptions(options);
         resolutionDropDown.value = currentResolutionIndex;
+
+        Resolution resolution = resolutions[resolutions.Count()-1];
+        Screen.SetResolution(resolution.width, resolution.height, full);
+
         resolutionDropDown.RefreshShownValue();
     }
 
@@ -142,16 +148,32 @@ public class MenuController : MonoBehaviour
     //    Debug.Log(resolutionDropdown.value + " " + w + " " + h);
     //}
 
-    public void setResolution(int resolutionIndex)
+    public void setResolution()
     {
-        Resolution resolution = resolutions[resolutionIndex];
-        Screen.SetResolution(resolution.width, resolution.height, fullScreenMode, resolution.refreshRateRatio);
+        myaudio.Play();
+
+        resolutionIdx = resolutionDropDown.value;
+        Resolution resolution = resolutions[resolutionIdx];
+
+        Debug.Log(resolution);
+
+        Screen.SetResolution(resolution.width, resolution.height, full);
+
     }
 
     public void sliderChange()
+
     {
+        //float vol = 40f;
+
+        //vol = slider.value > 0.1f ? vol * slider.value - 40f : -80f;
+
+        //Debug.Log("Slider: " + slider.value + "Volume: " + vol);
+
+        //masterMixer.SetFloat("MasterVolume", vol);
+        
         Debug.Log("Volume " + slider.value + " Final " + Mathf.Log10(slider.value * 20));
-        masterMixer.SetFloat("MasterVolume", Mathf.Log10(slider.value * 20));
+        masterMixer.SetFloat("MasterVolume", Mathf.Log10(slider.value + 0.0001f) * 20);
     }
 
     public void fullscreenToggle()
@@ -159,11 +181,12 @@ public class MenuController : MonoBehaviour
         myaudio.Play();
         Debug.Log(fullScreenToggler.isOn);
 
-        if (full) fullScreenMode = FullScreenMode.FullScreenWindow;
-        else fullScreenMode = FullScreenMode.ExclusiveFullScreen;
-
         full = !full;
-        //Screen.SetResolution(w, h, full);
+
+        resolutionIdx = resolutionDropDown.value;
+        Resolution resolution = resolutions[resolutionIdx];
+
+        Screen.SetResolution(resolution.width, resolution.height, full);
     }
 
 }
