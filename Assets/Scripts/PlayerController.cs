@@ -101,10 +101,12 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+#if UNITY_EDITOR
         if(Input.GetKeyDown(KeyCode.R))
         {
             RestartScene();
         }
+#endif
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -224,6 +226,7 @@ public class PlayerController : MonoBehaviour
     private void RestartScene()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("PlayTest");
+        Time.timeScale = 1;
     }
 
     private void DashFixed()
