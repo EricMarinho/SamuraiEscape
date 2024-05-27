@@ -62,6 +62,7 @@ public class InGameUIManager : MonoBehaviour
             tutorialPopup.SetActive(true);
             closeTutorialButton.gameObject.SetActive(true);
             Time.timeScale = 0;
+            AudioManager.instance.StopWalkingSound();
         };
         closeTutorialButton.onClick.AddListener(() =>
         {

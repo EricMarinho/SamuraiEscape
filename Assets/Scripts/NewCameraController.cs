@@ -42,7 +42,11 @@ public class NewCameraController : MonoBehaviour
 
     public void SetCameraPosition(Vector3 position)
     {
+        if (currentCameraPosition == position)
+            return;
+        
         currentCameraPosition = position;
+        AudioManager.instance.PlayScreenTransitionSound();
     }
 
     private void ForceAspectRatio(float targetAspect)

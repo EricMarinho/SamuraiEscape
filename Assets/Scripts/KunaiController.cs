@@ -34,9 +34,9 @@ public class KunaiController : MonoBehaviour
 
             Debug.Log(hit.collider.name);
             kunaiSpeed = 0;
-            kunaiSpeedMultiplier = 0;               
+            kunaiSpeedMultiplier = 0;     
+            rb.velocity = Vector2.zero;
             PlayerController.instance.DeactivateBreakTime();
-            //AudioManager.instance.PlayKunaiImpactSound();
 
             if (hit.collider.gameObject.CompareTag("Barrier"))
             {
@@ -45,6 +45,11 @@ public class KunaiController : MonoBehaviour
                 if (PlayerController.instance.isJumping) return;
                 PlayerController.instance.RecoverKunai();
             }
+            else
+            {
+                AudioManager.instance.PlayKunaiImpactSound();
+            }
+            this.enabled = false;
         }
     }
 

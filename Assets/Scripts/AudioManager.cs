@@ -19,6 +19,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip teleportSound;
     public AudioClip kunaiImpactSound;
     public AudioClip barrierSound;
+    public AudioClip screenTransitionSound;
 
     //Singleton
     public static AudioManager instance;
@@ -103,7 +104,13 @@ public class AudioManager : MonoBehaviour
 
     public void PlayBarrierSound()
     {
-        //sfxAudioSource.PlayOneShot(barrierSound);
+        sfxAudioSource.PlayOneShot(barrierSound);
+    }
+
+    public void PlayScreenTransitionSound()
+    {
+        sfxAudioSource.PlayOneShot(screenTransitionSound);
+        Debug.Log("Play Screen Transition Sound");
     }
 
 }

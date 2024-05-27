@@ -134,6 +134,12 @@ public class PlayerController : MonoBehaviour
             ShootKunai();  
         }
 
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            if(!isJumping)
+                OnCrystalCollected();
+        }
+
         if (isDashing)
         {
             DashUpdate();

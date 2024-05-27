@@ -59177,6 +59177,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8144034235777550990, guid: 8200f39d858e85d45af5f37993f4899c, type: 3}
+      propertyPath: barrierSound
+      value: 
+      objectReference: {fileID: 8300000, guid: c678d0efb40b7bf4caf067a3eb749c86, type: 3}
+    - target: {fileID: 8144034235777550990, guid: 8200f39d858e85d45af5f37993f4899c, type: 3}
+      propertyPath: screenTransitionSound
+      value: 
+      objectReference: {fileID: 8300000, guid: c7892c76acf58254a853dce3e967f5ca, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
