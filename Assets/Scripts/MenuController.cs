@@ -70,6 +70,7 @@ public class MenuController : MonoBehaviour
     {
 
         fullScreenMode = FullScreenMode.ExclusiveFullScreen; 
+        Time.timeScale = 1;
 
         resolutions = Screen.resolutions;
         resolutionDropDown.ClearOptions();

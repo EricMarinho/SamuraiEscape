@@ -37,8 +37,8 @@ public class AudioManager : MonoBehaviour
 
     void Start()
     {
-        musicAudioSource.volume = PlayerPrefs.GetInt("Volume", 1)/3;    
-        sfxAudioSource.volume = PlayerPrefs.GetInt("Volume", 1)/3; 
+        musicAudioSource.volume = PlayerPrefs.GetInt("Volume", 1)/4f;    
+        sfxAudioSource.volume = PlayerPrefs.GetInt("Volume", 1)/4f; 
         walkingAudioSource.volume = PlayerPrefs.GetInt("Volume", 1);
     }
 
@@ -51,8 +51,8 @@ public class AudioManager : MonoBehaviour
 
     public void UnmuteSounds()
     {
-        musicAudioSource.volume = PlayerPrefs.GetInt("Volume", 1)/3;
-        sfxAudioSource.volume = PlayerPrefs.GetInt("Volume", 1)/3;
+        musicAudioSource.volume = PlayerPrefs.GetInt("Volume", 1)/4f;
+        sfxAudioSource.volume = PlayerPrefs.GetInt("Volume", 1)/4f;
         walkingAudioSource.volume = PlayerPrefs.GetInt("Volume", 1);
     }
 

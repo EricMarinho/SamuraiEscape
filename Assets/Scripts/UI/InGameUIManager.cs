@@ -72,6 +72,8 @@ public class InGameUIManager : MonoBehaviour
         GameEvents.Instance.OnEndGame += () =>
         {
             endGameScreen.SetActive(true);
+            toggleMuteButton.gameObject.SetActive(false);
+            openReturnToMenuButtonPopup.gameObject.SetActive(false);
         };
         endGameReturnToMenuButton.onClick.AddListener(() =>
         {
