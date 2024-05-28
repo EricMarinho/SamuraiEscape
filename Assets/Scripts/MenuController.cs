@@ -94,21 +94,17 @@ public class MenuController : MonoBehaviour
         resolutionDropDown.AddOptions(options);
         resolutionDropDown.value = currentResolutionIndex;
 
-        Resolution resolution = resolutions[resolutions.Count()-1];
-        Screen.SetResolution(resolution.width, resolution.height, full);
+        SetResolution();
         SetVolume();
-        SetIsFullScreen();
 
         resolutionDropDown.RefreshShownValue();
     }
 
-    private void SetIsFullScreen()
+    private void SetResolution()
     {
-        full = PlayerPrefs.HasKey("FullScreen") ? PlayerPrefs.GetString("FullScreen") == "true" : true;
-        fullScreenToggler.isOn = full;
-        
-        fullScreenMode = full ? FullScreenMode.ExclusiveFullScreen : FullScreenMode.Windowed;
-        Screen.fullScreenMode = fullScreenMode;
+        resolutionIdx = PlayerPrefs.HasKey("Resolution") ? PlayerPrefs.GetInt("Resolution") : resolutions.Length - 1;
+        Resolution resolution = resolutions[resolutionIdx];
+        Screen.SetResolution(resolution.width, resolution.height, full);
     }
 
     private void SetVolume()
@@ -213,8 +209,6 @@ public class MenuController : MonoBehaviour
         Resolution resolution = resolutions[resolutionIdx];
 
         Screen.SetResolution(resolution.width, resolution.height, full);
-        PlayerPrefs.SetString("FullScreen", full ? "true" : "false");
-        PlayerPrefs.Save();
     }
 
 }
