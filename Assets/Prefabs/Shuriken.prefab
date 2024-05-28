@@ -92,7 +92,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c74348737a5dc9648a410728c53acd9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kunaiSpeed: 18
+  kunaiSpeed: 16
   kunaiRadius: 0.2
   kunaiDetectingDistance: 0.05
   kunaiRotationSpeed: 5
