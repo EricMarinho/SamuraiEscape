@@ -416,7 +416,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bd3d13e154f5e243bca640a810e4fe7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tutorialMessage: "Shurikens podem ultrapassar Cristais sem colet\xE1-los."
+  tutorialMessage: "Shurikens can pass through Crystals without collecting them.\r"
 --- !u!61 &41830897
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2125,8 +2125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bd3d13e154f5e243bca640a810e4fe7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tutorialMessage: Cristais flutuantes concedem uma nova carga da Shuriken ao serem
-    coletados.
+  tutorialMessage: Floating Crystals grant a new Shuriken charge when collected.
 --- !u!61 &314993357
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -18968,9 +18967,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bd3d13e154f5e243bca640a810e4fe7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tutorialMessage: "Ap\xF3s se Teleportar, clique com o bot\xE3o esquerdo para utilizar
-    a Habilidade de Avan\xE7o.\n\n(Atravesse a abertura acima para acessar uma nova
-    sala)"
+  tutorialMessage: 'After teleporting, click the left mouse button to use the Dash
+    Ability.
+
+    
+
+    (Cross the opening above to access a new room)'
 --- !u!61 &685340146
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -20563,8 +20565,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bd3d13e154f5e243bca640a810e4fe7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tutorialMessage: "Use as teclas A e D para andar e ESPA\xC7O para pular.\n\n(Clique
-    com o bot\xE3o esquerdo para continuar...)"
+  tutorialMessage: 'Use the A and D keys to walk and SPACE to jump.
+
+    
+
+    (Click
+    the left mouse button to continue...)'
 --- !u!61 &1005660241
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -21288,11 +21294,35 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -50
       objectReference: {fileID: 0}
+    - target: {fileID: 449508539603292841, guid: fd783a011e05c7a46a8ab9f9b8818631, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 468543065577421164, guid: fd783a011e05c7a46a8ab9f9b8818631, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 5a2edea8c2548dc4582b204d02f3db48, type: 3}
+    - target: {fileID: 732456569586383594, guid: fd783a011e05c7a46a8ab9f9b8818631, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 5a2edea8c2548dc4582b204d02f3db48, type: 3}
+    - target: {fileID: 1059011895753064049, guid: fd783a011e05c7a46a8ab9f9b8818631, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 5a2edea8c2548dc4582b204d02f3db48, type: 3}
     - target: {fileID: 1858579880800439889, guid: fd783a011e05c7a46a8ab9f9b8818631, type: 3}
       propertyPath: m_Text
-      value: "Em sua \xFAltima tentativa da profunda pris\xE3o, o Samurai conquista
-        sua fuga...\n\nObrigado por jogar!"
+      value: 'In his last attempt at the deep prison, the Samurai achieves his escape...
+
+        
+
+        Thank
+        you for playing!'
       objectReference: {fileID: 0}
+    - target: {fileID: 1858579880800439889, guid: fd783a011e05c7a46a8ab9f9b8818631, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 5a2edea8c2548dc4582b204d02f3db48, type: 3}
     - target: {fileID: 2228790648494012004, guid: fd783a011e05c7a46a8ab9f9b8818631, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -21377,6 +21407,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: InGameUICanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 3243282273665101757, guid: fd783a011e05c7a46a8ab9f9b8818631, type: 3}
+      propertyPath: m_Text
+      value: Mute
+      objectReference: {fileID: 0}
+    - target: {fileID: 3243282273665101757, guid: fd783a011e05c7a46a8ab9f9b8818631, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 5a2edea8c2548dc4582b204d02f3db48, type: 3}
+    - target: {fileID: 5099188862570904369, guid: fd783a011e05c7a46a8ab9f9b8818631, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 5a2edea8c2548dc4582b204d02f3db48, type: 3}
+    - target: {fileID: 5235371914039766261, guid: fd783a011e05c7a46a8ab9f9b8818631, type: 3}
+      propertyPath: m_Text
+      value: Return to Menu
+      objectReference: {fileID: 0}
+    - target: {fileID: 5235371914039766261, guid: fd783a011e05c7a46a8ab9f9b8818631, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 5a2edea8c2548dc4582b204d02f3db48, type: 3}
     - target: {fileID: 7932469605622624406, guid: fd783a011e05c7a46a8ab9f9b8818631, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -21389,6 +21439,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7984412271121729959, guid: fd783a011e05c7a46a8ab9f9b8818631, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 5a2edea8c2548dc4582b204d02f3db48, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -21581,7 +21635,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bd3d13e154f5e243bca640a810e4fe7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tutorialMessage: "Clique com o bot\xE3o direito para retornar a Shuriken."
+  tutorialMessage: "Right-click to recall the Shuriken.\r"
 --- !u!61 &1247277303
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -21672,8 +21726,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bd3d13e154f5e243bca640a810e4fe7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tutorialMessage: "Clique com o bot\xE3o esquerdo para atirar a Shuriken.\n\nClique
-    novamente para Teleportar-se at\xE9 a Shuriken no meio do ar."
+  tutorialMessage: 'Click the left mouse button to throw the Shuriken.
+
+    
+
+    Click
+    again to teleport to the Shuriken in mid-air.'
 --- !u!61 &1337027791
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -23336,7 +23394,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bd3d13e154f5e243bca640a810e4fe7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tutorialMessage: "Barreiras M\xE1gicas impedem a passagem de Shurikens e Avan\xE7os."
+  tutorialMessage: Magic Barriers block the passage of Shurikens and Dashes.
 --- !u!61 &1649484669
 BoxCollider2D:
   m_ObjectHideFlags: 0
