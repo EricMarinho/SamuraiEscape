@@ -18970,7 +18970,7 @@ MonoBehaviour:
   tutorialMessage: 'After teleporting, click the left mouse button to use the Dash
     Ability.
 
-    
+
 
     (Cross the opening above to access a new room)'
 --- !u!61 &685340146
@@ -20567,7 +20567,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tutorialMessage: 'Use the A and D keys to walk and SPACE to jump.
 
-    
+
 
     (Click
     the left mouse button to continue...)'
@@ -20923,7 +20923,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 1.6468072, y: -3.8149757}
+  m_Offset: {x: 1.7242975, y: -3.8149757}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -20934,7 +20934,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 7.019086, y: 6.3859863}
+  m_Size: {x: 6.864105, y: 6.3859863}
   m_EdgeRadius: 0
 --- !u!1 &1067392416
 GameObject:
@@ -21099,7 +21099,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 1.8422852, y: -3.9578354}
+  m_Offset: {x: 1.7561853, y: -3.9578354}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -21110,7 +21110,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 7.987979, y: 6.8739743}
+  m_Size: {x: 7.815779, y: 6.8739743}
   m_EdgeRadius: 0
 --- !u!1 &1103503420
 GameObject:
@@ -21314,7 +21314,7 @@ PrefabInstance:
       propertyPath: m_Text
       value: 'In his last attempt at the deep prison, the Samurai achieves his escape...
 
-        
+
 
         Thank
         you for playing!'
@@ -21728,7 +21728,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tutorialMessage: 'Click the left mouse button to throw the Shuriken.
 
-    
+
 
     Click
     again to teleport to the Shuriken in mid-air.'
@@ -60291,6 +60291,14 @@ PrefabInstance:
       propertyPath: Loop
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2487078325340859514, guid: 8200f39d858e85d45af5f37993f4899c, type: 3}
+      propertyPath: m_Volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2487078325340859514, guid: 8200f39d858e85d45af5f37993f4899c, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 198503dd431acc34394eadcbf4f34d0f, type: 3}
     - target: {fileID: 2597850958727029090, guid: 8200f39d858e85d45af5f37993f4899c, type: 3}
       propertyPath: m_Name
       value: AudioManager
