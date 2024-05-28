@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -76,6 +77,7 @@ public class MenuController : MonoBehaviour
         resolutionDropDown.ClearOptions();
         List<string> options = new List<string>();
         int currentResolutionIndex = 0;
+
         for (int i = 0; i < resolutions.Length; i++)
         {
             string option = resolutions[i].width + " x " + resolutions[i].height + " " + (int)resolutions[i].refreshRateRatio.value + "Hz";
@@ -87,15 +89,34 @@ public class MenuController : MonoBehaviour
                 currentResolutionIndex = i;
             }
         }
+        currentResolutionIndex = PlayerPrefs.GetInt("Resolution", resolutionIdx);
+
         resolutionDropDown.AddOptions(options);
         resolutionDropDown.value = currentResolutionIndex;
 
         Resolution resolution = resolutions[resolutions.Count()-1];
         Screen.SetResolution(resolution.width, resolution.height, full);
+        SetVolume();
+        SetIsFullScreen();
 
         resolutionDropDown.RefreshShownValue();
     }
 
+    private void SetIsFullScreen()
+    {
+        full = PlayerPrefs.HasKey("FullScreen") ? PlayerPrefs.GetString("FullScreen") == "true" : true;
+        fullScreenToggler.isOn = full;
+        
+        fullScreenMode = full ? FullScreenMode.ExclusiveFullScreen : FullScreenMode.Windowed;
+        Screen.fullScreenMode = fullScreenMode;
+    }
+
+    private void SetVolume()
+    {
+        float volume = PlayerPrefs.HasKey("Volume") ? float.Parse(PlayerPrefs.GetString("Volume")) : 1f;
+        slider.value = volume;
+        masterMixer.SetFloat("MasterVolume", Mathf.Log10(volume + 0.0001f) * 20);
+    }
 
     public void startGame()
     {
@@ -159,6 +180,8 @@ public class MenuController : MonoBehaviour
         Debug.Log(resolution);
 
         Screen.SetResolution(resolution.width, resolution.height, full);
+        PlayerPrefs.SetInt("Resolution", resolutionIdx);
+        PlayerPrefs.Save();
 
     }
 
@@ -175,6 +198,8 @@ public class MenuController : MonoBehaviour
         
         Debug.Log("Volume " + slider.value + " Final " + Mathf.Log10(slider.value * 20));
         masterMixer.SetFloat("MasterVolume", Mathf.Log10(slider.value + 0.0001f) * 20);
+        PlayerPrefs.SetString("Volume", slider.value.ToString());
+        PlayerPrefs.Save();
     }
 
     public void fullscreenToggle()
@@ -188,6 +213,8 @@ public class MenuController : MonoBehaviour
         Resolution resolution = resolutions[resolutionIdx];
 
         Screen.SetResolution(resolution.width, resolution.height, full);
+        PlayerPrefs.SetString("FullScreen", full ? "true" : "false");
+        PlayerPrefs.Save();
     }
 
 }
