@@ -119,7 +119,7 @@ public class MenuController : MonoBehaviour
         Debug.Log("START");
         home.gameObject.SetActive(false);
         transitionScreen.SetActive(true);
-        SceneManager.LoadScene("PlayTest");
+        SceneManager.LoadScene("IntroductionScene");
     }
 
     public void setCanvasHome()
