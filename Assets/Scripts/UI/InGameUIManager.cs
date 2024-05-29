@@ -78,6 +78,7 @@ public class InGameUIManager : MonoBehaviour
             endGameScreen.SetActive(true);
             toggleMuteButton.gameObject.SetActive(false);
             openReturnToMenuButtonPopup.gameObject.SetActive(false);
+            kunaiIndicator.gameObject.SetActive(false);
         };
         endGameReturnToMenuButton.onClick.AddListener(() =>
         {
