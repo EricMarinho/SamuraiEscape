@@ -18971,7 +18971,6 @@ MonoBehaviour:
     Ability.
 
 
-
     (Cross the opening above to access a new room)'
 --- !u!61 &685340146
 BoxCollider2D:
@@ -20568,7 +20567,6 @@ MonoBehaviour:
   tutorialMessage: 'Use the A and D keys to walk and SPACE to jump.
 
 
-
     (Click
     the left mouse button to continue...)'
 --- !u!61 &1005660241
@@ -21302,6 +21300,10 @@ PrefabInstance:
       propertyPath: m_FontData.m_Font
       value: 
       objectReference: {fileID: 12800000, guid: 5a2edea8c2548dc4582b204d02f3db48, type: 3}
+    - target: {fileID: 468543065577421164, guid: fd783a011e05c7a46a8ab9f9b8818631, type: 3}
+      propertyPath: m_FontData.m_Alignment
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 732456569586383594, guid: fd783a011e05c7a46a8ab9f9b8818631, type: 3}
       propertyPath: m_FontData.m_Font
       value: 
@@ -21431,6 +21433,10 @@ PrefabInstance:
       propertyPath: m_FontData.m_Font
       value: 
       objectReference: {fileID: 12800000, guid: 5a2edea8c2548dc4582b204d02f3db48, type: 3}
+    - target: {fileID: 3505188890984531787, guid: fd783a011e05c7a46a8ab9f9b8818631, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3587212701639194716, guid: fd783a011e05c7a46a8ab9f9b8818631, type: 3}
       propertyPath: m_SizeDelta.x
       value: 250
@@ -21486,6 +21492,22 @@ PrefabInstance:
     - target: {fileID: 5600659702411491468, guid: fd783a011e05c7a46a8ab9f9b8818631, type: 3}
       propertyPath: m_RaycastTarget
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7885723482106988810, guid: fd783a011e05c7a46a8ab9f9b8818631, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -12.1089
+      objectReference: {fileID: 0}
+    - target: {fileID: 7885723482106988810, guid: fd783a011e05c7a46a8ab9f9b8818631, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -21.7795
+      objectReference: {fileID: 0}
+    - target: {fileID: 7885723482106988810, guid: fd783a011e05c7a46a8ab9f9b8818631, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.5739136
+      objectReference: {fileID: 0}
+    - target: {fileID: 7885723482106988810, guid: fd783a011e05c7a46a8ab9f9b8818631, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -1.9274979
       objectReference: {fileID: 0}
     - target: {fileID: 7932469605622624406, guid: fd783a011e05c7a46a8ab9f9b8818631, type: 3}
       propertyPath: m_AnchorMax.x
@@ -21787,7 +21809,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tutorialMessage: 'Click the left mouse button to throw the Shuriken.
-
 
 
     Click
@@ -59188,7 +59209,7 @@ Transform:
   m_GameObject: {fileID: 1878479354}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 10.54, y: 2.745, z: 0.040700205}
+  m_LocalPosition: {x: 10.54, y: 2.37, z: 0.040700205}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -59245,7 +59266,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 1
   m_UsedByComposite: 0
-  m_Offset: {x: -0.017367184, y: 0.04909197}
+  m_Offset: {x: -0.012274966, y: 0.04909197}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.3646763, y: 0.49858415}
@@ -59256,7 +59277,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.7080592, y: 0.099190466}
+  m_Size: {x: 1.00534, y: 0.099190466}
   m_EdgeRadius: 0
 --- !u!212 &1878479358
 SpriteRenderer:

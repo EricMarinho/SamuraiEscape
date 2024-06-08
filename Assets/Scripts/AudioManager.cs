@@ -38,9 +38,9 @@ public class AudioManager : MonoBehaviour
 
     void Start()
     {
-        musicAudioSource.volume = float.Parse(PlayerPrefs.GetString("Volume", "0.5f"));    
-        sfxAudioSource.volume = float.Parse(PlayerPrefs.GetString("Volume", "1")); 
-        walkingAudioSource.volume = float.Parse(PlayerPrefs.GetString("Volume", "1"));
+        musicAudioSource.volume = float.Parse(PlayerPrefs.GetString("Volume", (0.5f).ToString()));
+        sfxAudioSource.volume = float.Parse(PlayerPrefs.GetString("Volume", (1).ToString()));
+        walkingAudioSource.volume = float.Parse(PlayerPrefs.GetString("Volume", (1).ToString()));
     }
 
     public void MuteSounds()
@@ -52,9 +52,9 @@ public class AudioManager : MonoBehaviour
 
     public void UnmuteSounds()
     {
-        musicAudioSource.volume = float.Parse(PlayerPrefs.GetString("Volume","0.5f"));
-        sfxAudioSource.volume = float.Parse(PlayerPrefs.GetString("Volume", "1"));
-        walkingAudioSource.volume = float.Parse(PlayerPrefs.GetString("Volume", "1"));
+        musicAudioSource.volume = float.Parse(PlayerPrefs.GetString("Volume",(0.5f).ToString()));
+        sfxAudioSource.volume = float.Parse(PlayerPrefs.GetString("Volume", (1).ToString()));
+        walkingAudioSource.volume = float.Parse(PlayerPrefs.GetString("Volume", (1).ToString()));
     }
 
     public void PlayJumpSound()
